@@ -6,8 +6,8 @@ return {
 		},
 		highlight = {
 			groups = {
-				InclineNormal = "AerialLine",
-				InclineNormalNC = "StatusLine",
+				InclineNormal = "StatusLine",
+				InclineNormalNC = "StatusLineNC",
 			},
 		},
 		window = {
@@ -20,12 +20,17 @@ return {
 		},
 		render = function(props)
 			local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+			local not_current = props.win ~= vim.api.nvim_get_current_win()
+
 			if filename == "" then
 				filename = "[No Name]"
 			end
 
 			return {
-				{ " " },
+				{
+					not_current and " " or "▍",
+					guifg = string.format("#%06x", vim.api.nvim_get_hl(0, { name = "TablineSel" }).bg),
+				},
 				{ filename },
 				{ vim.bo[props.buf].modified and " ●" or "" },
 				{ vim.bo[props.buf].ro and " ⊘" or "" },
