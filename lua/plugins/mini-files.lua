@@ -1,10 +1,10 @@
 return {
 	"echasnovski/mini.files",
 	version = "*",
+	event = "BufEnter",
 	dependencies = {
 		"echasnovski/mini.icons",
 	},
-	event = "BufEnter */*",
 	opts = {
 		mappings = {
 			go_in = "<S-cr>",

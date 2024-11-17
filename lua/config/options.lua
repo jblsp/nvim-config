@@ -1,5 +1,5 @@
 -- Globals
-vim.g.colorscheme = "onedark" -- Can either be a built-in colorscheme or a plugin from /lua/plugins/colorschemes
+vim.g.colorscheme = "tokyonight" -- Can either be a built-in colorscheme or a plugin from /lua/plugins/colorschemes
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
