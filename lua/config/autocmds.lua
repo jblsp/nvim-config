@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 local auto_blank_bd_augroup = vim.api.nvim_create_augroup("auto-delete-blank-buffers", { clear = true })
-vim.api.nvim_create_autocmd("SessionLoadPost", {
+vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
 	group = auto_blank_bd_augroup,
 	callback = function()
 		vim.api.nvim_create_autocmd("BufEnter", {
