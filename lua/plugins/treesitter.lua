@@ -6,7 +6,7 @@ return {
 	event = { "BufReadPost", "BufWritePost", "BufNewFile" },
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	opts = {
-		ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
+		ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "gitignore" },
 		ignore_install = {},
 		auto_install = true,
 		highlight = {
@@ -15,13 +15,12 @@ return {
 		},
 		indent = { enable = true },
 		incremental_selection = {
-			enabled = true,
+			enable = true,
 			keymaps = {
-				--TODO: Set good keymaps
-				init_selection = false,
-				node_incremental = false,
+				init_selection = "<leader><space>",
+				node_incremental = "<CR>",
 				scope_incremental = false,
-				node_decremental = false,
+				node_decremental = "<BS>",
 			},
 		},
 	},

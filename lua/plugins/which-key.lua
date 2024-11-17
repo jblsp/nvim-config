@@ -4,9 +4,6 @@ return {
 	event = "VeryLazy",
 	opts = {
 		delay = 350,
-		layout = {
-			spacing = 2,
-		},
 		plugins = {
 			spelling = {
 				enabled = false,
