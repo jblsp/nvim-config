@@ -8,9 +8,6 @@ vim.keymap.set({ "n", "v" }, "<C-f>", "<C-f>zz")
 vim.keymap.set({ "n", "v" }, "<C-b>", "<C-b>zz")
 
 -- buffers
--- vim.keymap.set("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete current buffer" })
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 
 -- write file
