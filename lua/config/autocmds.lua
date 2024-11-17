@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
 	desc = "Send notification on dir change",
 	group = vim.api.nvim_create_augroup("dir-change-notif", { clear = true }),
 	callback = function(args)
-		vim.notify("cwd set to " .. args.file, vim.log.levels.INFO)
+		vim.notify("cwd set to " .. args.file, vim.log.levels.INFO, { title = "cwd" })
 	end,
 })
 
