@@ -1,8 +1,11 @@
 return {
 	"stevearc/conform.nvim",
 	version = "*",
-	event = { "BufReadPost", "BufNewFile" },
+	event = "BufWritePre",
 	cmd = { "ConformInfo" },
+	dependencies = {
+		{ "zapling/mason-conform.nvim", dependencies = "mason.nvim" },
+	},
 	keys = {
 		{
 			"<leader>f",
@@ -16,27 +19,23 @@ return {
 	opts = {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
-			-- Disable "format_on_save lsp_fallback" for languages that don't
-			-- have a well standardized coding style. You can add additional
-			-- languages here or re-enable it for the disabled ones.
-			local disable_filetypes = { c = true, cpp = true }
-			local lsp_format_opt
-			if disable_filetypes[vim.bo[bufnr].filetype] then
-				lsp_format_opt = "never"
-			else
-				lsp_format_opt = "fallback"
+			if not vim.g.autoformat or vim.b[bufnr].disable_autoformat then
+				return
 			end
 			return {
 				timeout_ms = 500,
-				lsp_format = lsp_format_opt,
+				lsp_format = "fallback",
 			}
 		end,
 		formatters_by_ft = {
 			lua = { "stylua" },
-			css = { "prettier" },
 			python = { "isort", "black" },
-			javascript = { "prettier" },
-			js = { "prettier" },
 		},
 	},
+	config = function(_, opts)
+		require("conform").setup(opts)
+		require("mason-conform").setup()
+
+		vim.g.autoformat = true
+	end,
 }
