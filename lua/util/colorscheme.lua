@@ -6,14 +6,9 @@ function M.create_colorscheme_spec(short_url, name, opts)
 		[1] = short_url,
 		name = name,
 		priority = 1000,
-		lazy = true,
+		lazy = not (name == vim.g.colorscheme),
 		opts = opts,
 	}
-	if vim.g.colorscheme == name then
-		spec.init = function()
-			vim.cmd.colorscheme(name)
-		end
-	end
 	return spec
 end
 
