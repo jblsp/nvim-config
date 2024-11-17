@@ -15,6 +15,14 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("DirChanged", {
+	desc = "Send notification on dir change",
+	group = vim.api.nvim_create_augroup("dir-change-notif", { clear = true }),
+	callback = function(args)
+		vim.notify("cwd set to " .. args.file, vim.log.levels.INFO)
+	end,
+})
+
 local auto_blank_bd_augroup = vim.api.nvim_create_augroup("auto-delete-blank-buffers", { clear = true })
 vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
 	group = auto_blank_bd_augroup,

@@ -49,9 +49,7 @@ return {
 				vim.keymap.set("n", "_", function()
 					local cur_entry_path = require("mini.files").get_fs_entry().path
 					local dir = vim.fs.dirname(cur_entry_path)
-					if vim.fn.getcwd() ~= dir then
-						util.set_cwd(dir)
-					end
+					vim.fn.chdir(dir)
 				end, { buffer = args.data.buf_id, desc = "Set cwd to current location" })
 
 				vim.keymap.set("n", "<Esc>", function()

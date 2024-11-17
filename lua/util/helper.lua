@@ -14,11 +14,6 @@ function M.is_buf_active(bufnr, exclude_win)
 	return false
 end
 
-function M.set_cwd(dir)
-	vim.fn.chdir(dir)
-	vim.notify("cwd set to " .. dir, vim.log.levels.INFO)
-end
-
 function M.in_git_project()
 	local cmd = "git rev-parse --is-inside-work-tree"
 	return vim.fn.system(cmd) == "true\n"
