@@ -11,6 +11,7 @@ return {
 		notifier = {
 			enabled = true,
 			timeout = 5000,
+			width = { min = 35, max = 65 },
 			margin = { top = 1, right = 2 },
 			style = "minimal",
 		},
