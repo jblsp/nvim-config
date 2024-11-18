@@ -15,6 +15,16 @@ return {
 					end,
 				},
 			},
+			lualine_b = {
+				"branch",
+				"diff",
+				{
+					"diagnostics",
+					cond = function()
+						return vim.diagnostic.is_enabled()
+					end,
+				},
+			},
 			lualine_c = {
 				{
 					"filename",
@@ -23,9 +33,8 @@ return {
 						readonly = "⊘",
 					},
 					cond = function()
-						local bufnr = vim.api.nvim_get_current_buf()
-						local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
-						local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+						local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
+						local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 						local exclude_buftypes = { "nofile" }
 						local exclude_filetypes = { "TelescopePrompt" }
 
