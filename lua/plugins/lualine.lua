@@ -24,8 +24,21 @@ return {
 					},
 					cond = function()
 						local bufnr = vim.api.nvim_get_current_buf()
-						if vim.api.nvim_get_option_value("buftype", { buf = bufnr }) == "nofile" then
-							return false
+						local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
+						local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+						local exclude_buftypes = { "nofile" }
+						local exclude_filetypes = { "TelescopePrompt" }
+
+						for _, ebuftype in ipairs(exclude_buftypes) do
+							if buftype == ebuftype then
+								return false
+							end
+						end
+
+						for _, efiletype in ipairs(exclude_filetypes) do
+							if efiletype == filetype then
+								return false
+							end
 						end
 
 						return true
