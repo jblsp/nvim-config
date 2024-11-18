@@ -1,11 +1,12 @@
 _G.util = {
-	add = function(funcs)
-		for name, func in pairs(funcs) do
-			_G.util[name] = func
+	add = function(tbl)
+		for name, val in pairs(tbl) do
+			_G.util[name] = val
 		end
 	end,
 }
 
-util.add(require("util.helper"))
 util.add(require("util.colorscheme"))
+util.add(require("util.helper"))
 util.add(require("util.keymap"))
+util.add(require("util.toggle"))

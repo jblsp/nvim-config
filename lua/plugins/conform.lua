@@ -19,7 +19,7 @@ return {
 	opts = {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
-			if not vim.g.autoformat or vim.b[bufnr].disable_autoformat then
+			if vim.g.autoformat == false or vim.b[bufnr].autoformat == false then
 				return
 			end
 			return {
@@ -35,7 +35,5 @@ return {
 	config = function(_, opts)
 		require("conform").setup(opts)
 		require("mason-conform").setup()
-
-		vim.g.autoformat = true
 	end,
 }
