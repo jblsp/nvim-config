@@ -9,6 +9,7 @@ vim.keymap.set({ "n", "v" }, "<C-b>", "<C-b>zz")
 
 -- buffers
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
+vim.keymap.set("n", "<leader>bl", "<cmd>b#<cr>", { desc = "Last Buffer" })
 
 -- write file
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Write File" })

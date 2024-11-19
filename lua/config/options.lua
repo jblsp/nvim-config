@@ -27,4 +27,4 @@ vim.opt.termguicolors = true
 vim.opt.undofile = true -- Save undo history for files
 vim.opt.undolevels = 10000
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-vim.opt.wrap = true
+vim.opt.wrap = false

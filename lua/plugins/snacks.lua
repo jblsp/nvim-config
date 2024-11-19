@@ -35,9 +35,23 @@ return {
 		{
 			"<leader>bD",
 			function()
-				Snacks.bufdelete.other()
+				Snacks.bufdelete.all()
 			end,
-			desc = "Delete all buffers except current",
+			desc = "Delete all buffers",
+		},
+		{
+			"<leader>bw",
+			function()
+				Snacks.bufdelete({ wipe = true })
+			end,
+			desc = "Wipeout current buffer",
+		},
+		{
+			"<leader>bW",
+			function()
+				Snacks.bufdelete.all({ wipe = true })
+			end,
+			desc = "Wipeout all buffers",
 		},
 		{
 			"<leader>gg",
