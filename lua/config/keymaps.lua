@@ -46,4 +46,4 @@ util.toggle.vim_var("autoformat"):map("<leader>tA")
 -- LSP mappings
 util.lsp_map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
 util.lsp_map("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-util.lsp_map({ "n", "x" }, "<leader>dc", vim.lsp.buf.code_action, { desc = "Code Action" })
+util.lsp_map({ "n", "x" }, "<leader>lc", vim.lsp.buf.code_action, { desc = "Code Action" })

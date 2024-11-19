@@ -165,10 +165,10 @@ return {
 		util.lsp_map("n", "gy", function()
 			require("telescope.builtin").lsp_type_definitions()
 		end, { desc = "Go to Type Definition" })
-		util.lsp_map("n", "<leader>ds", function()
+		util.lsp_map("n", "<leader>ls", function()
 			require("telescope.builtin").lsp_document_symbols()
 		end, { desc = "Document Symbols" })
-		util.lsp_map("n", "<leader>ws", function()
+		util.lsp_map("n", "<leader>ls", function()
 			require("telescope.builtin").lsp_dynamic_workspace_symbols()
 		end, { desc = "Workspace Symbols" })
 	end,
