@@ -29,7 +29,7 @@ return {
 			return {
 				{
 					not_current and " " or "▍",
-					guifg = string.format("#%06x", vim.api.nvim_get_hl(0, { name = "TablineSel" }).bg),
+					guifg = string.format("#%06x", vim.api.nvim_get_hl(0, { name = "Special" }).fg),
 				},
 				{ filename },
 				{ vim.bo[props.buf].modified and " ●" or "" },
