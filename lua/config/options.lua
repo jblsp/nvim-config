@@ -12,8 +12,6 @@ vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.inccommand = "split"
 vim.opt.laststatus = 3 -- Global status line
 vim.opt.linebreak = true
-vim.opt.list = true -- List mode
-vim.opt.listchars = { tab = "» ", trail = " ", nbsp = "␣" }
 vim.opt.mouse = "a"
 vim.opt.number = true -- Line numbers
 vim.opt.relativenumber = true
