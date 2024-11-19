@@ -100,7 +100,6 @@ return {
 			"<leader>/",
 			function()
 				local dropdown = require("telescope.themes").get_dropdown({
-					winblend = 10,
 					previewer = false,
 				})
 				require("telescope.builtin").current_buffer_fuzzy_find(dropdown)
