@@ -31,15 +31,15 @@ return {
 				end
 			end, { desc = "Previous hunk" })
 
-			map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage hunk" })
+			map("n", "<leader>ga", gitsigns.stage_hunk, { desc = "Stage hunk" })
 			map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
-			map("v", "<leader>gs", function()
+			map("v", "<leader>ga", function()
 				gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { desc = "Stage hunk" })
 			map("v", "<leader>gr", function()
 				gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 			end, { desc = "Reset hunk" })
-			map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer" })
+			map("n", "<leader>gA", gitsigns.stage_buffer, { desc = "Stage buffer" })
 			map("n", "<leader>gu", gitsigns.undo_stage_hunk, { desc = "Undo stage hunk" })
 			map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
 			map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview hunk" })
