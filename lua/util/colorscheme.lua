@@ -1,6 +1,6 @@
 local M = {}
 
-function M.create_colorscheme_spec(short_url, name, opts)
+function M.create_spec(short_url, name, opts)
 	opts = opts or {}
 	local spec = {
 		[1] = short_url,
@@ -12,4 +12,4 @@ function M.create_colorscheme_spec(short_url, name, opts)
 	return spec
 end
 
-return M
+return { colorscheme = M }

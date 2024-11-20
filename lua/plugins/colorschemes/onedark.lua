@@ -1,1 +1,1 @@
-return util.create_colorscheme_spec("navarasu/onedark.nvim", "onedark", { style = "deep" })
+return util.colorscheme.create_spec("navarasu/onedark.nvim", "onedark", { style = "deep" })

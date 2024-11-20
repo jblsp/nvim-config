@@ -1,1 +1,1 @@
-return util.create_colorscheme_spec("folke/tokyonight.nvim", "tokyonight")
+return util.colorscheme.create_spec("folke/tokyonight.nvim", "tokyonight")
