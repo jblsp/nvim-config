@@ -5,6 +5,8 @@ return {
   config = function()
     local lint = require("lint")
 
+    -- if the config_files field is present,
+    -- the linter will only run when one of the specified config files is present
     local linters = {
       selene = {
         filetypes = { "lua" },
@@ -43,10 +45,17 @@ return {
           return
         end
 
-        -- Lint only when config file is present
         local linter_names = lint._resolve_linter_by_ft(vim.bo.filetype)
         linter_names = vim.tbl_filter(function(name)
-          return vim.fs.find(linters[name].config_files, { path = vim.api.nvim_buf_get_name(0), upward = true })[1]
+          -- Lint only when config file is present
+          local cfg_files = linters[name].config_files
+          if cfg_files then
+            if not vim.fs.find(cfg_files, { path = vim.api.nvim_buf_get_name(0), upward = true })[1] then
+              return false
+            end
+          end
+
+          return true
         end, linter_names)
 
         require("lint").try_lint(linter_names)
