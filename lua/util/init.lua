@@ -1,9 +1,9 @@
 _G.util = {
-	add = function(tbl)
-		for name, val in pairs(tbl) do
-			_G.util[name] = val
-		end
-	end,
+  add = function(tbl)
+    for name, val in pairs(tbl) do
+      _G.util[name] = val
+    end
+  end,
 }
 
 util.add(require("util.colorscheme"))

@@ -30,7 +30,7 @@ vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to the up window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
 
 vim.keymap.set("n", "yc", function()
-	vim.fn.setreg("+", vim.fn.getreg('"'))
+  vim.fn.setreg("+", vim.fn.getreg('"'))
 end, { desc = "Copy Anon Register to System Clipboard" })
 
 -- Toggles
