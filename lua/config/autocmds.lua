@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
 	group = auto_blank_bd_augroup,
 	callback = function()
 		vim.api.nvim_create_autocmd("BufEnter", {
-			desc = "Delete previous buffer if scratch and blank",
+			desc = "Delete previous buffer if empty",
 			group = auto_blank_bd_augroup,
 			callback = function()
 				local prev_buf = vim.fn.bufnr("#")
@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
 			end,
 		})
 		vim.api.nvim_create_autocmd("WinClosed", {
-			desc = "Delete scratch buffer in closed window if inactive",
+			desc = "Delete empty buffer in closed window if inactive",
 			group = auto_blank_bd_augroup,
 			callback = function(args)
 				local win = tonumber(args.match)
