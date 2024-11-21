@@ -24,7 +24,6 @@ return {
 					["q"] = "close",
 				},
 			},
-			borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 		},
 		pickers = {
 			buffers = {
@@ -67,16 +66,16 @@ return {
 		{
 			"<leader>sf",
 			function()
-				require("telescope").extensions.frecency.frecency({ workspace = "CWD" })
+				require("telescope.builtin").find_files()
 			end,
-			desc = "Search Files in cwd",
+			desc = "Search Files",
 		},
 		{
 			"<leader>sF",
 			function()
 				require("telescope").extensions.frecency.frecency()
 			end,
-			desc = "Search Files",
+			desc = "Search Files (Frecency)",
 		},
 		{
 			"<leader>st",
@@ -228,7 +227,7 @@ return {
 		-- setup extensions
 		setup_extension("ui-select", require("telescope.themes").get_dropdown({}))
 		setup_extension("fzf")
-		setup_extension("frecency", { show_filter_column = false })
+		setup_extension("frecency", { show_filter_column = false, db_safe_mode = false, db_validate_threshold = 1 })
 
 		setup_telescope()
 
