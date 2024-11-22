@@ -18,7 +18,6 @@ return {
       load_on_setup = false,
       mappings = {
         delete_session = { { "n", "i" }, "<C-D>" },
-        alternate_session = { { "n", "i" }, "<C-S>" },
         copy_session = { { "n", "i" }, "<C-Y>" },
       },
     },
