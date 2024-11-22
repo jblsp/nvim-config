@@ -15,6 +15,7 @@ return {
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim",
     "nvim-telescope/telescope-symbols.nvim",
+    "debugloop/telescope-undo.nvim",
   },
 
   opts = {
@@ -207,6 +208,13 @@ return {
       mode = { "i", "n" },
       desc = "Insert nerd symbol",
     },
+    {
+      "<leader>u",
+      function()
+        require("telescope").extensions.undo.undo()
+      end,
+      desc = "Undo History",
+    },
   },
   config = function(_, opts)
     local extensions = {}
@@ -228,6 +236,15 @@ return {
     setup_extension("ui-select", require("telescope.themes").get_dropdown({}))
     setup_extension("fzf")
     setup_extension("frecency", { show_filter_column = false, db_safe_mode = false, db_validate_threshold = 1 })
+    setup_extension("undo", {
+      use_delta = false,
+      layout_config = {
+        horizontal = {
+          width = 0.8,
+          preview_width = 0.7,
+        },
+      },
+    })
 
     setup_telescope()
 
