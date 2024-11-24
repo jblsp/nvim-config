@@ -35,7 +35,7 @@ return {
     {
       "<leader>bD",
       function()
-        Snacks.bufdelete.others()
+        Snacks.bufdelete.other()
       end,
       desc = "Delete all other buffers",
     },
