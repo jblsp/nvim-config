@@ -1,5 +1,6 @@
 return {
   "b0o/incline.nvim",
+  event = "VeryLazy",
   opts = {
     hide = {
       only_win = true,
