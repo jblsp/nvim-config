@@ -101,6 +101,9 @@ return {
 
             for i = 1, #p + 1 do
               if i == #p + 1 or p[i].token == ev.data.params.token then
+                if value.title == value.message then
+                  value.title = ""
+                end
                 p[i] = {
                   token = ev.data.params.token,
                   msg = ("LSP: %s%s [%3d%%] "):format(
