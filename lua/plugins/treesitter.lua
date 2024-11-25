@@ -53,6 +53,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    opts = { line_numbers = true, max_lines = 4 },
+    event = { "BufReadPost", "BufNewFile" },
+    opts = { multiwindow = true, line_numbers = true, max_lines = 4 },
   },
 }
