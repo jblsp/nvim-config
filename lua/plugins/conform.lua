@@ -10,12 +10,30 @@ return {
     {
       "<leader>f",
       function()
-        require("conform").format({ async = true, lsp_format = "fallback" })
+        require("conform").format()
       end,
       desc = "Format buffer",
     },
+    {
+      "<leader>f",
+      function()
+        local _, srow, scol = unpack(vim.fn.getpos("'<"))
+
+        local _, erow, ecol = unpack(vim.fn.getpos("'>"))
+        require("conform").format({
+          async = false,
+          range = { start = { srow, scol }, ["end"] = { erow, ecol } },
+        })
+      end,
+      mode = "v",
+      desc = "Format selection",
+    },
   },
   opts = {
+    formatters_by_ft = {
+      lua = { "stylua" },
+      python = { "isort", "black" },
+    },
     notify_on_error = false,
     format_on_save = function(bufnr)
       if vim.g.autoformat == false or vim.b[bufnr].autoformat == false then
@@ -26,9 +44,9 @@ return {
         lsp_format = "fallback",
       }
     end,
-    formatters_by_ft = {
-      lua = { "stylua" },
-      python = { "isort", "black" },
+    default_format_opts = {
+      lsp_format = "fallback",
+      async = true,
     },
   },
   config = function(_, opts)
