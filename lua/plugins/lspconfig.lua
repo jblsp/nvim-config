@@ -29,9 +29,12 @@ return {
       ensure_installed = vim.tbl_keys(mason_lsps or {}),
       handlers = {
         function(server_name)
-          local server = mason_lsps[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
+          local server = mason_lsps[server_name]
+          -- Only configures servers in the mason_lsps table
+          if server then
+            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+            require("lspconfig")[server_name].setup(server)
+          end
         end,
       },
     })
