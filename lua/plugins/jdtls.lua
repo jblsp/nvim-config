@@ -13,6 +13,9 @@ return {
         local jdtls_path = jdtls_mason_pkg:get_install_path()
 
         local root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew", "pom.xml" })
+        if root_dir == nil or root_dir == vim.env.HOME then
+          root_dir = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
+        end
 
         local install_path = vim.fs.find(function(name, _)
           return name:match("org.eclipse.equinox.launcher_%w+")
