@@ -6,7 +6,6 @@ return {
     {
       "williamboman/mason-lspconfig.nvim",
       version = "*",
-      dependencies = { "mason.nvim" },
     },
   },
   config = function()
