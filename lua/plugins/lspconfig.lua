@@ -1,7 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   version = "*",
-  event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     {
       "williamboman/mason-lspconfig.nvim",
@@ -9,8 +9,7 @@ return {
     },
   },
   config = function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+    local capabilities = util.lsp_capabilities.get()
 
     local mason_lsps = {
       lua_ls = {
