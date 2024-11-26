@@ -84,18 +84,38 @@ return {
           init_options = {
             bundles = {},
           },
+
+          on_attach = function(_, bufnr)
+            vim.api.nvim_create_autocmd("LspRequest", {
+              buffer = bufnr,
+              callback = function(args)
+                if args.data.request.method == "textDocument/formatting" then
+                  local ftype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+                  if ftype == "java" then
+                    require("jdtls").organize_imports()
+                  end
+                end
+              end,
+            })
+
+            local function map(mode, lhs, rhs, opts)
+              opts = opts or {}
+              opts.buffer = bufnr
+              opts.desc = "jdtls: " .. opts.desc
+              vim.keymap.set(mode, lhs, rhs, opts)
+            end
+
+            map("n", "lev", function()
+              require("jdtls").extract_variable()
+            end, { desc = "Extract Variable" })
+            map("n", "lec", function()
+              require("jdtls").extract_constant()
+            end, { desc = "Extract Constant" })
+            map("n", "lem", function()
+              require("jdtls").extract_method()
+            end, { desc = "Extract Method" })
+          end,
         })
-      end,
-    })
-    vim.api.nvim_create_autocmd("LspRequest", {
-      group = vim.api.nvim_create_augroup("jdtls-organize-imports-on-format", { clear = true }),
-      callback = function(args)
-        if args.data.request.method == "textDocument/formatting" then
-          local ftype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
-          if ftype == "java" then
-            require("jdtls").organize_imports()
-          end
-        end
       end,
     })
   end,
