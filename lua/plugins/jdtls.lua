@@ -87,5 +87,16 @@ return {
         })
       end,
     })
+    vim.api.nvim_create_autocmd("LspRequest", {
+      group = vim.api.nvim_create_augroup("jdtls-organize-imports-on-format", { clear = true }),
+      callback = function(args)
+        if args.data.request.method == "textDocument/formatting" then
+          local ftype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+          if ftype == "java" then
+            require("jdtls").organize_imports()
+          end
+        end
+      end,
+    })
   end,
 }
