@@ -8,6 +8,5 @@ _G.util = {
 
 util.add(require("util.colorscheme"))
 util.add(require("util.helper"))
-util.add(require("util.keymap"))
-util.add(require("util.toggle"))
+util.add(require("util.lsp_map"))
 util.add(require("util.lsp_capabilities"))
