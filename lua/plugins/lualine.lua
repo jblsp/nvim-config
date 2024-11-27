@@ -28,24 +28,12 @@ return {
       lualine_c = {
         {
           "filename",
-          symbols = {
-            modified = "●",
-            readonly = "⊘",
-          },
           cond = function()
             local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
-            local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-            local exclude_buftypes = { "nofile" }
-            local exclude_filetypes = { "TelescopePrompt" }
+            local exclude_buftypes = { "nofile", "prompt" }
 
             for _, ebuftype in ipairs(exclude_buftypes) do
               if buftype == ebuftype then
-                return false
-              end
-            end
-
-            for _, efiletype in ipairs(exclude_filetypes) do
-              if efiletype == filetype then
                 return false
               end
             end
@@ -54,7 +42,19 @@ return {
           end,
         },
       },
-      lualine_x = { "encoding", { "fileformat", icons_enabled = false }, "filetype" },
+      lualine_x = {
+        "filetype",
+        {
+          "encoding",
+        },
+        {
+          "fileformat",
+          icons_enabled = false,
+          cond = function()
+            return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
+          end,
+        },
+      },
     },
   },
   init = function()
