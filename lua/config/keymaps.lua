@@ -1,12 +1,6 @@
 -- escape removes search highlights and clears cmdline
 vim.keymap.set("n", "<Esc>", "<cmd>echo ''<cr><cmd>noh<cr>")
 
--- make navigation center cursor
-vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz")
-vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz")
-vim.keymap.set({ "n", "v" }, "<C-f>", "<C-f>zz")
-vim.keymap.set({ "n", "v" }, "<C-b>", "<C-b>zz")
-
 -- buffers
 vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 vim.keymap.set("n", "<leader>bl", "<cmd>b#<cr>", { desc = "Last Buffer" })
@@ -32,16 +26,6 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
 vim.keymap.set("n", "yc", function()
   vim.fn.setreg("+", vim.fn.getreg('"'))
 end, { desc = "Copy Anon Register to System Clipboard" })
-
--- Toggles
-util.toggle.vim_opt("wrap", { buffer_local = true }):map("<leader>tw")
-util.toggle.vim_opt("wrap"):map("<leader>tW")
-util.toggle.vim_opt("spell", { buffer_local = true }):map("<leader>ts")
-util.toggle.vim_opt("spell"):map("<leader>tS")
-util.toggle.diagnostics():map("<leader>td")
-util.toggle.inlay_hints():map("<leader>ti")
-util.toggle.vim_var("autoformat", { buffer_local = true }):map("<leader>ta")
-util.toggle.vim_var("autoformat"):map("<leader>tA")
 
 -- LSP mappings
 util.lsp_map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
