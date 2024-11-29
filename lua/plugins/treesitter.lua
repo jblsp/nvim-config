@@ -5,6 +5,7 @@ return {
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    dependencies = { "RRethy/nvim-treesitter-endwise" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
       ensure_installed = {
@@ -39,6 +40,7 @@ return {
         enable = true,
         additional_vim_regex_highlighting = false,
       },
+      endwise = { enable = true },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
