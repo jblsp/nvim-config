@@ -1,6 +1,10 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "bwpge/lualine-pretty-path", "nvim-tree/nvim-web-devicons" },
+  init = function()
+    vim.opt.showmode = false
+    vim.opt.ruler = false -- Disable default ruler
+  end,
   opts = {
     options = {
       component_separators = "",
@@ -27,7 +31,20 @@ return {
       },
       lualine_c = {
         {
-          "filename",
+          "pretty_path",
+          icon_show = false,
+          symbols = {
+            modified = "[+]",
+            readonly = "[-]",
+          },
+          directories = {
+            max_depth = 4,
+          },
+          highlights = {
+            directory = "NonText",
+            filename = "",
+            modified = "",
+          },
           cond = function()
             local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
             local exclude_buftypes = { "nofile", "prompt" }
@@ -57,8 +74,4 @@ return {
       },
     },
   },
-  init = function()
-    vim.opt.showmode = false
-    vim.opt.ruler = false -- Disable default ruler
-  end,
 }
