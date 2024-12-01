@@ -10,10 +10,11 @@ return {
     },
   },
   opts = {
+    auto_restore = false,
+    auto_create = util.in_git_project,
+    use_git_branch = true,
     suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
     bypass_save_filetypes = { "dashboard", "alpha", "netrw", "minifiles" },
-    auto_create = util.in_git_project,
-    show_auto_restore_notif = true,
     session_lens = {
       load_on_setup = false,
       mappings = {
