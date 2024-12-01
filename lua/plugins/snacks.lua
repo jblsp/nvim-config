@@ -14,13 +14,6 @@ return {
       enabled = true,
       size = 5 * 1024 * 1024, -- 5MB
     },
-    notifier = {
-      enabled = true,
-      timeout = 5000,
-      width = { min = 35, max = 80 },
-      margin = { top = 1, right = 2 },
-      style = "minimal",
-    },
     quickfile = { enabled = true },
   },
   keys = {
@@ -66,13 +59,6 @@ return {
       end,
       desc = "Git Browse",
     },
-    {
-      "<leader>n",
-      function()
-        Snacks.notifier.show_history()
-      end,
-      desc = "Notification History",
-    },
   },
   init = function()
     local augroup = vim.api.nvim_create_augroup("Snacks", { clear = true })
@@ -88,55 +74,6 @@ return {
           group = augroup,
           callback = function(event)
             Snacks.rename.on_rename_file(event.data.from, event.data.to)
-          end,
-        })
-
-        -- LSP Progress
-        ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-        local progress = vim.defaulttable()
-        vim.api.nvim_create_autocmd("LspProgress", {
-          group = augroup,
-          ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-          callback = function(ev)
-            local client = vim.lsp.get_client_by_id(ev.data.client_id)
-            local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-            if not client or type(value) ~= "table" then
-              return
-            end
-            local p = progress[client.id]
-
-            for i = 1, #p + 1 do
-              if i == #p + 1 or p[i].token == ev.data.params.token then
-                if value.title == value.message then
-                  value.title = ""
-                end
-                p[i] = {
-                  token = ev.data.params.token,
-                  msg = ("LSP: %s%s [%3d%%] "):format(
-                    value.title or "",
-                    value.message and (" **%s**"):format(value.message) or "",
-                    value.kind == "end" and 100 or value.percentage or 100
-                  ),
-                  done = value.kind == "end",
-                }
-                break
-              end
-            end
-
-            local msg = {} ---@type string[]
-            progress[client.id] = vim.tbl_filter(function(v)
-              return table.insert(msg, v.msg) or not v.done
-            end, p)
-
-            local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-            vim.notify(table.concat(msg, "\n"), "info", {
-              id = "lsp_progress",
-              title = client.name,
-              opts = function(notif)
-                notif.icon = #progress[client.id] == 0 and " "
-                  or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-              end,
-            })
           end,
         })
       end,
