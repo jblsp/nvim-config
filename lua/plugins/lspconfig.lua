@@ -21,6 +21,7 @@ return {
           },
         },
       },
+      pyright = {},
     }
 
     require("mason-lspconfig").setup({

@@ -32,7 +32,7 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
-      python = { "isort", "black" },
+      python = { "black", "isort" },
     },
     notify_on_error = false,
     format_on_save = function(bufnr)
