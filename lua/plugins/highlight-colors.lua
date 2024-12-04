@@ -1,6 +1,6 @@
 return {
   "brenoprata10/nvim-highlight-colors",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile", "VeryLazy" },
   opts = {
     render = "virtual",
     virtual_symbol = "●",

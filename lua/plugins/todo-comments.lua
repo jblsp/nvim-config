@@ -1,7 +1,7 @@
 return {
   "folke/todo-comments.nvim",
   version = "*",
-  event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile", "VeryLazy" },
   opts = {
     signs = false,
   },

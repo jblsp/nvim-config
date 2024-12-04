@@ -4,7 +4,7 @@ return {
     version = "*",
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
-    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "VeryLazy" },
     dependencies = { "RRethy/nvim-treesitter-endwise" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     opts = {
@@ -55,7 +55,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "BufReadPost", "BufNewFile", "VeryLazy" },
     opts = { multiwindow = true, line_numbers = true, max_lines = 4 },
   },
 }
