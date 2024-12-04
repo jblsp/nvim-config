@@ -55,7 +55,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
   end,
 })
 vim.api.nvim_create_autocmd("User", {
-  pattern = "SessionLoadPre",
+  pattern = { "SessionLoadPre", "PersistenceLoadPre" },
   group = auto_blank_bd_augroup,
   callback = function()
     vim.api.nvim_clear_autocmds({ group = auto_blank_bd_augroup })
