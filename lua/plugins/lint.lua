@@ -17,6 +17,9 @@ return {
         filetypes = { "python" },
         config_files = { ".pylintrc" },
       },
+      ["markdownlint-cli2"] = {
+        filetypes = { "markdown" },
+      },
     }
 
     local linters_by_ft = {}
