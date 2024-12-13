@@ -1,12 +1,13 @@
-_G.util = {
-  require = function(module)
-    local tbl = require(module)
-    for name, val in pairs(tbl) do
-      _G.util[name] = val
-    end
-  end,
-}
+_G.util = {}
 
-util.require("util.colorscheme")
-util.require("util.helper")
-util.require("util.lsp_capabilities")
+local function util_require(module)
+  _G.util[module] = {}
+  local tbl = require("util." .. module)
+  for key, val in pairs(tbl) do
+    _G.util[module][key] = val
+  end
+end
+
+util_require("colorscheme")
+util_require("lsp_capabilities")
+util_require("fn")

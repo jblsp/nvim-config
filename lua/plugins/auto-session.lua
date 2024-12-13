@@ -11,7 +11,7 @@ return {
   },
   opts = {
     auto_restore = false,
-    auto_create = util.in_git_project,
+    auto_create = util.fn.in_git_project,
     use_git_branch = true,
     suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
     bypass_save_filetypes = { "dashboard", "alpha", "netrw", "minifiles" },

@@ -12,4 +12,4 @@ function M.create_spec(short_url, name, opts)
   return spec
 end
 
-return { colorscheme = M }
+return M

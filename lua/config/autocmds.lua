@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
       callback = function()
         local prev_buf = vim.fn.bufnr("#")
         if prev_buf ~= -1 then
-          if util.is_buf_empty(prev_buf) and not util.is_buf_active(prev_buf) then
+          if util.fn.is_buf_empty(prev_buf) and not util.fn.is_buf_active(prev_buf) then
             vim.api.nvim_buf_delete(prev_buf, { force = true })
           end
         end
@@ -47,7 +47,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
         if args.buf == -1 then
           return
         end
-        if util.is_buf_empty(args.buf) and not util.is_buf_active(args.buf, { win }) then
+        if util.fn.is_buf_empty(args.buf) and not util.fn.is_buf_active(args.buf, { win }) then
           vim.api.nvim_buf_delete(args.buf, { force = true })
         end
       end,

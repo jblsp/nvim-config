@@ -14,4 +14,4 @@ function M.modify(callback)
   table.insert(mods, callback)
 end
 
-return { lsp_capabilities = M }
+return M
