@@ -23,6 +23,6 @@ end, { desc = "Copy Anon Register to System Clipboard" })
 vim.keymap.set("n", "yc", "yygccp", { remap = true, desc = "Duplicate line and comment out original" })
 
 -- LSP mappings
-util.lsp_map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
-util.lsp_map("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-util.lsp_map({ "n", "x" }, "<leader>lc", vim.lsp.buf.code_action, { desc = "Code Action" })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+vim.keymap.set("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+vim.keymap.set({ "n", "x" }, "<leader>lc", vim.lsp.buf.code_action, { desc = "Code Action" })

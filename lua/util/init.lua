@@ -9,5 +9,4 @@ _G.util = {
 
 util.require("util.colorscheme")
 util.require("util.helper")
-util.require("util.lsp_map")
 util.require("util.lsp_capabilities")

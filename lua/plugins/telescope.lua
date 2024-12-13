@@ -215,6 +215,48 @@ return {
       end,
       desc = "Undo History",
     },
+    {
+      "gd",
+      function()
+        require("telescope.builtin").lsp_definitions()
+      end,
+      desc = "Go to Definition",
+    },
+    {
+      "gr",
+      function()
+        require("telescope.builtin").lsp_references()
+      end,
+      desc = "Go to References",
+    },
+    {
+      "gI",
+      function()
+        require("telescope.builtin").lsp_implementations()
+      end,
+      desc = "Go to Implementation",
+    },
+    {
+      "gy",
+      function()
+        require("telescope.builtin").lsp_type_definitions()
+      end,
+      desc = "Go to Type Definition",
+    },
+    {
+      "<leader>ls",
+      function()
+        require("telescope.builtin").lsp_document_symbols()
+      end,
+      desc = "Document Symbols",
+    },
+    {
+      "<leader>lS",
+      function()
+        require("telescope.builtin").lsp_dynamic_workspace_symbols()
+      end,
+      desc = "Workspace Symbols",
+    },
   },
   config = function(_, opts)
     local extensions = {}
@@ -247,24 +289,5 @@ return {
     })
 
     setup_telescope()
-
-    util.lsp_map("n", "gd", function()
-      require("telescope.builtin").lsp_definitions()
-    end, { desc = "Go to Definition" })
-    util.lsp_map("n", "gr", function()
-      require("telescope.builtin").lsp_references()
-    end, { desc = "Go to References" })
-    util.lsp_map("n", "gI", function()
-      require("telescope.builtin").lsp_implementations()
-    end, { desc = "Go to Implementation" })
-    util.lsp_map("n", "gy", function()
-      require("telescope.builtin").lsp_type_definitions()
-    end, { desc = "Go to Type Definition" })
-    util.lsp_map("n", "<leader>ls", function()
-      require("telescope.builtin").lsp_document_symbols()
-    end, { desc = "Document Symbols" })
-    util.lsp_map("n", "<leader>ls", function()
-      require("telescope.builtin").lsp_dynamic_workspace_symbols()
-    end, { desc = "Workspace Symbols" })
   end,
 }
