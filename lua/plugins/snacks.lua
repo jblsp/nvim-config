@@ -15,6 +15,18 @@ return {
       size = 5 * 1024 * 1024, -- 5MB
     },
     quickfile = { enabled = true },
+    indent = {
+      indent = {
+        char = "▎",
+      },
+      scope = {
+        char = "▎",
+        only_current = true,
+      },
+      animate = {
+        enabled = false,
+      },
+    },
   },
   keys = {
     {
