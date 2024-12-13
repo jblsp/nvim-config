@@ -17,9 +17,7 @@ vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window 
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
 
-vim.keymap.set("n", "<leader>y", function()
-  vim.fn.setreg("+", vim.fn.getreg('"'))
-end, { desc = "Copy Anon Register to System Clipboard" })
+vim.keymap.set("n", "<leader>y", util.fn.anontoclip, { desc = "Copy Anon Register to System Clipboard" })
 vim.keymap.set("n", "yc", "yygccp", { remap = true, desc = "Duplicate line and comment out original" })
 
 -- LSP mappings

@@ -19,4 +19,11 @@ function M.in_git_project()
   return vim.fn.system(cmd) == "true\n"
 end
 
+function M.anontoclip()
+  local content = vim.fn.getreg('"')
+  if vim.fn.setreg("+", content) == 0 then
+    vim.cmd("echo 'Anon register copied to clipboard'")
+  end
+end
+
 return M
