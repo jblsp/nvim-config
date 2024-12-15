@@ -1,35 +1,70 @@
-vim.api.nvim_create_autocmd("TextYankPost", {
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local group
+
+autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+  group = augroup("highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
+autocmd("VimEnter", {
   desc = 'Remove "How to disable mouse" tip from context menu',
-  group = vim.api.nvim_create_augroup("remove-disable-mouse-tip", { clear = true }),
+  group = augroup("remove-disable-mouse-tip", { clear = true }),
   callback = function()
     vim.cmd([[aunmenu PopUp.How-to\ disable\ mouse]])
     vim.cmd([[aunmenu PopUp.-1-]])
   end,
 })
 
-vim.api.nvim_create_autocmd("DirChanged", {
+autocmd("DirChanged", {
   desc = "Send notification on dir change",
-  group = vim.api.nvim_create_augroup("dir-change-notif", { clear = true }),
+  group = augroup("dir-change-notif", { clear = true }),
   callback = function(args)
     vim.notify("cwd set to " .. args.file, vim.log.levels.INFO, { title = "cwd" })
   end,
 })
 
-local auto_blank_bd_augroup = vim.api.nvim_create_augroup("auto-delete-blank-buffers", { clear = true })
-vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
-  group = auto_blank_bd_augroup,
+group = augroup("CmdlineLinenr", { clear = true })
+local cmdline_debounce_timer
+autocmd("CmdlineEnter", {
+  group = group,
   callback = function()
-    vim.api.nvim_create_autocmd("BufEnter", {
+    cmdline_debounce_timer = vim.uv.new_timer()
+    cmdline_debounce_timer:start(
+      5,
+      0,
+      vim.schedule_wrap(function()
+        if vim.o.number then
+          vim.o.relativenumber = false
+          vim.api.nvim__redraw({ statuscolumn = true })
+        end
+      end)
+    )
+  end,
+})
+autocmd("CmdlineLeave", {
+  group = group,
+  callback = function()
+    if cmdline_debounce_timer then
+      cmdline_debounce_timer:stop()
+      cmdline_debounce_timer = nil
+    end
+    if vim.o.number then
+      vim.o.relativenumber = true
+    end
+  end,
+})
+
+group = augroup("auto-delete-blank-buffers", { clear = true })
+autocmd({ "VimEnter", "SessionLoadPost" }, {
+  group = group,
+  callback = function()
+    autocmd("BufEnter", {
       desc = "Delete previous buffer if empty",
-      group = auto_blank_bd_augroup,
+      group = group,
       callback = function()
         local prev_buf = vim.fn.bufnr("#")
         if prev_buf ~= -1 then
@@ -39,9 +74,9 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
         end
       end,
     })
-    vim.api.nvim_create_autocmd("WinClosed", {
+    autocmd("WinClosed", {
       desc = "Delete empty buffer in closed window if inactive",
-      group = auto_blank_bd_augroup,
+      group = group,
       callback = function(args)
         local win = tonumber(args.match)
         if args.buf == -1 then
@@ -54,10 +89,10 @@ vim.api.nvim_create_autocmd({ "VimEnter", "SessionLoadPost" }, {
     })
   end,
 })
-vim.api.nvim_create_autocmd("User", {
+autocmd("User", {
   pattern = { "SessionLoadPre", "PersistenceLoadPre" },
-  group = auto_blank_bd_augroup,
+  group = group,
   callback = function()
-    vim.api.nvim_clear_autocmds({ group = auto_blank_bd_augroup })
+    vim.api.nvim_clear_autocmds({ group = augroup })
   end,
 })
