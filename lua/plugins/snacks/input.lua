@@ -10,6 +10,7 @@ return {
         wo = { winhighlight = "NormalFloat:StatusLine" },
         keys = {
           esc = { "<esc>", { "cmp_close", "cancel" } },
+          cr = { "<cr>", { "cmp_accept", "confirm" } },
           i_esc = { "<esc>", "stopinsert", mode = "i" },
           i_cr = { "<cr>", { "cmp_accept", "confirm" }, mode = "i" },
           i_tab = { "<tab>", { "cmp_select_next", "cmp" }, mode = "i" },
