@@ -35,6 +35,7 @@ return {
       python = { "black", "isort" },
       markdown = { "prettier" },
       html = { "prettier" },
+      javascript = { "prettier" },
     },
     notify_on_error = false,
     format_on_save = function(bufnr)
