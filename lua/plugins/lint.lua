@@ -1,7 +1,7 @@
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPost", "BufNewFile", "VeryLazy" },
-  dependencies = { "rshkarin/mason-nvim-lint" },
+  dependencies = { "vlaw/mason-nvim-lint", branch = "more_mappings" },
   config = function()
     local lint = require("lint")
 
@@ -16,6 +16,9 @@ return {
       pylint = {
         filetypes = { "python" },
         config_files = { ".pylintrc" },
+      },
+      ["markdownlint-cli2"] = {
+        filetypes = { "markdown" },
       },
     }
 
