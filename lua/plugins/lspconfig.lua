@@ -2,16 +2,10 @@ return {
   "neovim/nvim-lspconfig",
   version = "*",
   event = { "BufReadPost", "BufNewFile", "VeryLazy" },
-  dependencies = {
-    {
-      "williamboman/mason-lspconfig.nvim",
-      version = "*",
-    },
-  },
   config = function()
     local capabilities = util.lsp_capabilities.get()
 
-    local mason_lsps = {
+    local servers = {
       lua_ls = {
         settings = {
           Lua = {
@@ -22,20 +16,13 @@ return {
         },
       },
       pyright = {},
+      nixd = {},
+      hls = {},
     }
 
-    require("mason-lspconfig").setup({
-      ensure_installed = vim.tbl_keys(mason_lsps or {}),
-      handlers = {
-        function(server_name)
-          local server = mason_lsps[server_name]
-          -- Only configures servers in the mason_lsps table
-          if server then
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end
-        end,
-      },
-    })
+    for server_name, config in pairs(servers) do
+      config.capabilities = vim.tbl_deep_extend("force", {}, capabilities, config.capabilities or {})
+      require("lspconfig")[server_name].setup(config)
+    end
   end,
 }

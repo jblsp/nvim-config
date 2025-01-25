@@ -10,6 +10,7 @@ vim.opt.cursorline = true -- Highlight current line
 vim.opt.cursorlineopt = "number" -- Only highlight number of current line
 vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.inccommand = "split"
+vim.opt.infercase = true
 vim.opt.laststatus = 3 -- Global status line
 vim.opt.linebreak = true
 vim.opt.mouse = "a"

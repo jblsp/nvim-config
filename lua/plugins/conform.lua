@@ -3,9 +3,6 @@ return {
   version = "*",
   event = "BufWritePre",
   cmd = { "ConformInfo" },
-  dependencies = {
-    { "zapling/mason-conform.nvim", dependencies = "mason.nvim" },
-  },
   keys = {
     {
       "<leader>f",
@@ -36,6 +33,7 @@ return {
       markdown = { "prettier" },
       html = { "prettier" },
       javascript = { "prettier" },
+      nix = { "alejandra" },
     },
     notify_on_error = false,
     format_on_save = function(bufnr)
@@ -52,8 +50,4 @@ return {
       async = true,
     },
   },
-  config = function(_, opts)
-    require("conform").setup(opts)
-    require("mason-conform").setup()
-  end,
 }

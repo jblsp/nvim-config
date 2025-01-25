@@ -1,7 +1,7 @@
 return {
   "mfussenegger/nvim-lint",
+  enabled = false,
   event = { "BufReadPost", "BufNewFile", "VeryLazy" },
-  dependencies = { "vlaw/mason-nvim-lint", branch = "more_mappings" },
   config = function()
     local lint = require("lint")
 
@@ -37,8 +37,6 @@ return {
     end
 
     lint.linters_by_ft = linters_by_ft
-
-    require("mason-nvim-lint").setup() -- Install missing linters
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
     vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost", "InsertLeave", "CursorHoldI" }, {

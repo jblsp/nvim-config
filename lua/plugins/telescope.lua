@@ -16,6 +16,7 @@ return {
     "nvim-telescope/telescope-live-grep-args.nvim",
     "nvim-telescope/telescope-symbols.nvim",
     "debugloop/telescope-undo.nvim",
+    { "nvim-tree/nvim-web-devicons", opts = {} },
   },
 
   opts = {
