@@ -1,6 +1,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "bwpge/lualine-pretty-path", "nvim-tree/nvim-web-devicons" },
+  lazy = false,
   init = function()
     vim.opt.showmode = false
   end,

@@ -1,5 +1,6 @@
 return {
   "stevearc/oil.nvim",
+  version = "*",
   lazy = false,
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
   keys = {
@@ -20,12 +21,6 @@ return {
   },
   opts = {
     default_file_explorer = true,
-    keymaps = {
-      ["<esc>"] = {
-        "actions.close",
-        mode = "n",
-      },
-    },
     view_options = {
       show_hidden = true,
       is_always_hidden = function(name, _)

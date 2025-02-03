@@ -21,6 +21,9 @@ in {
         # lazy.nvim dependencies
         git
 
+        # Treesitter dependencies
+        gcc
+
         # Language servers
         lua-language-server
         pyright

@@ -7,46 +7,34 @@ return {
     {
       "<leader>f",
       function()
+        if require("conform").format() then
+          vim.cmd("w")
+        end
+      end,
+      desc = "Format and write buffer",
+    },
+    {
+      "<leader>F",
+      function()
         require("conform").format()
       end,
       desc = "Format buffer",
-    },
-    {
-      "<leader>f",
-      function()
-        local _, srow, scol = unpack(vim.fn.getpos("'<"))
-
-        local _, erow, ecol = unpack(vim.fn.getpos("'>"))
-        require("conform").format({
-          async = false,
-          range = { start = { srow, scol }, ["end"] = { erow, ecol } },
-        })
-      end,
-      mode = "v",
-      desc = "Format selection",
     },
   },
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "black", "isort" },
-      markdown = { "prettier" },
-      html = { "prettier" },
-      javascript = { "prettier" },
+      markdown = { "prettierd" },
+      html = { "prettierd" },
+      javascript = { "prettierd" },
       nix = { "alejandra" },
+      java = { lsp_format = "fallback" },
     },
-    notify_on_error = false,
-    format_on_save = function(bufnr)
-      if vim.g.autoformat == false or vim.b[bufnr].autoformat == false then
-        return
-      end
-      return {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      }
-    end,
+    notify_on_error = true,
+    notify_no_formatter = true,
     default_format_opts = {
-      lsp_format = "fallback",
+      lsp_format = "never",
       async = true,
     },
   },
