@@ -146,5 +146,12 @@ return {
       end,
       desc = "Search colorschemes",
     },
+    {
+      "<leader>ch",
+      function()
+        Snacks.picker.cliphist()
+      end,
+      desc = "Search clipboard history",
+    },
   },
 }
