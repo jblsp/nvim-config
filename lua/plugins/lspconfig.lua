@@ -15,9 +15,10 @@ return {
           },
         },
       },
-      pyright = {},
-      nixd = {},
       hls = {},
+      nixd = {},
+      pyright = {},
+      ts_ls = {},
     }
 
     for server_name, config in pairs(servers) do

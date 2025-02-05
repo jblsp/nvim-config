@@ -1,19 +1,22 @@
 -- Globals
-vim.g.colorscheme = "catppuccin" -- Can either be a built-in colorscheme or a plugin from /lua/plugins/colorschemes
+vim.g.colorscheme = "tokyonight" -- Can either be a built-in colorscheme or a plugin from /lua/plugins/colorschemes
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 -- Opts
 vim.opt.breakindent = true -- Indent wrapped lines
 vim.opt.confirm = true -- Confirm to save changes when exiting modified buffer
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.cursorlineopt = "number" -- Only highlight number of current line
+vim.opt.foldexpr = "v:lua.util.fold.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr"
 vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.inccommand = "split"
 vim.opt.infercase = true
-vim.opt.laststatus = 3 -- Global status line
+-- vim.opt.laststatus = 3 -- Global status line
 vim.opt.linebreak = true
-vim.opt.mouse = "a"
+vim.opt.mouse = ""
 vim.opt.number = true -- Line numbers
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8

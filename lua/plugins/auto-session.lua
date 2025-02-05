@@ -17,8 +17,11 @@ return {
     bypass_save_filetypes = { "dashboard", "alpha", "netrw", "minifiles" },
     session_lens = {
       load_on_setup = false,
+      previewer = false, -- telescope previewer
+      theme_conf = {
+        preview = false, -- snacks previewer
+      },
       mappings = {
-        delete_session = { { "n", "i" }, "<C-D>" },
         copy_session = { { "n", "i" }, "<C-Y>" },
       },
     },

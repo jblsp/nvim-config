@@ -1,5 +1,6 @@
 return {
   "j-hui/fidget.nvim",
+  version = "*",
   event = "VeryLazy",
   opts = {
     progress = {

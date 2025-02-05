@@ -24,7 +24,7 @@ require("lazy").setup({
   install = { colorscheme = { vim.g.colorscheme } },
   checker = { enabled = true, notify = true },
   rocks = {
-    enabled = false,
+    hererocks = false,
   },
   performance = {
     rtp = {
@@ -33,5 +33,15 @@ require("lazy").setup({
         "netrwPlugin",
       },
     },
+  },
+  ui = {
+    backdrop = 85,
+  },
+  custom_keys = {
+    ["<localleader>l"] = false,
+    ["<localleader>t"] = false,
+    ["q"] = function()
+      vim.cmd("q")
+    end,
   },
 })

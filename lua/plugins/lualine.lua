@@ -1,6 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "bwpge/lualine-pretty-path", "nvim-tree/nvim-web-devicons" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   lazy = false,
   init = function()
     vim.opt.showmode = false
@@ -10,17 +10,18 @@ return {
       component_separators = "",
       section_separators = "",
       refresh = {
-        statusline = 35,
-        winbar = 35,
+        statusline = 50,
+        winbar = 50,
       },
+      globalstatus = vim.opt.laststatus:get() == 3,
     },
     sections = {
       lualine_a = {
         {
           "mode",
-          -- fmt = function(str)
-          --   return str:sub(1, 1)
-          -- end,
+          fmt = function(str)
+            return str:sub(1, 1)
+          end,
         },
       },
       lualine_b = {
@@ -28,34 +29,7 @@ return {
         "diff",
       },
       lualine_c = {
-        {
-          "pretty_path",
-          icon_show = false,
-          symbols = {
-            modified = "[+]",
-            readonly = "[-]",
-          },
-          directories = {
-            max_depth = 4,
-          },
-          highlights = {
-            directory = "NonText",
-            filename = "",
-            modified = "",
-          },
-          cond = function()
-            local buftype = vim.api.nvim_get_option_value("buftype", { buf = 0 })
-            local exclude_buftypes = { "nofile", "prompt" }
-
-            for _, ebuftype in ipairs(exclude_buftypes) do
-              if buftype == ebuftype then
-                return false
-              end
-            end
-
-            return true
-          end,
-        },
+        { "filename", path = 1 },
         {
           "diagnostics",
           cond = function()
@@ -63,8 +37,7 @@ return {
           end,
         },
       },
-      lualine_x = { "filetype" },
-      lualine_y = {
+      lualine_x = {
         {
           "encoding",
           fmt = function(s)
@@ -78,11 +51,9 @@ return {
             dos = "CRLF",
             mac = "CR",
           },
-          cond = function()
-            return vim.api.nvim_get_option_value("buftype", { buf = 0 }) ~= "prompt"
-          end,
         },
       },
+      lualine_y = { "filetype" },
       lualine_z = {
         {
           "location",
@@ -92,6 +63,9 @@ return {
         },
         "progress",
       },
+    },
+    inactive_sections = {
+      lualine_c = { { "filename", path = 1 } },
     },
   },
 }

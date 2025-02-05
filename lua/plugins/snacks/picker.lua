@@ -1,5 +1,16 @@
 return {
   "snacks.nvim",
+  opts = {
+    picker = {
+      enabled = true,
+      matcher = {
+        smartcase = vim.opt.smartcase:get(),
+        ignorecase = vim.opt.ignorecase:get(),
+        frecency = true,
+      },
+      ui_select = true,
+    },
+  },
   keys = {
     {
       "<leader>sh",
@@ -32,7 +43,7 @@ return {
     {
       "<leader>sgg",
       function()
-        Snacks.picker.pickers()
+        Snacks.picker.grep()
       end,
       desc = "Grep",
     },
@@ -66,7 +77,7 @@ return {
       desc = "Search current buffer",
     },
     {
-      "<leader>n",
+      "<leader>sn",
       function()
         Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
       end,
@@ -134,17 +145,6 @@ return {
         Snacks.picker.colorschemes()
       end,
       desc = "Search colorschemes",
-    },
-  },
-  opts = {
-    picker = {
-      enabled = true,
-      matcher = {
-        smartcase = vim.opt.smartcase:get(),
-        ignorecase = vim.opt.ignorecase:get(),
-        frecency = true,
-      },
-      ui_select = true,
     },
   },
 }

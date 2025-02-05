@@ -8,6 +8,7 @@ local function util_require(module)
   end
 end
 
+util_require("fold")
 util_require("colorscheme")
-util_require("lsp_capabilities")
 util_require("fn")
+util_require("lsp_capabilities")
