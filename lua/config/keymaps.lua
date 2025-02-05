@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
--- escape removes search highlights and clears cmdline
-map("n", "<Esc>", "<cmd>echo ''<cr><cmd>noh<cr>")
+-- escape removes search highlights
+map("n", "<Esc>", "<cmd>noh<cr>")
 
 -- buffers
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })

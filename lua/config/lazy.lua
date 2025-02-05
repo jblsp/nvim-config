@@ -21,13 +21,15 @@ require("lazy").setup({
   defaults = {
     lazy = true,
   },
+  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
   install = { colorscheme = { vim.g.colorscheme } },
-  checker = { enabled = true, notify = true },
+  checker = { enabled = true },
   rocks = {
     hererocks = false,
   },
   performance = {
     rtp = {
+      paths = { vim.env.NVIM_TREESITTER_PARSERS },
       disabled_plugins = {
         "netrw",
         "netrwPlugin",
