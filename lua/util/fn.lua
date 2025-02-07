@@ -21,13 +21,13 @@ end
 
 function M.anon_to_clip()
   local content = vim.fn.getreg('"')
-  if vim.fn.setreg("+", content) == 0 then
-    vim.cmd("echo 'Anon register copied to clipboard'")
+  if content ~= "" then
+    if vim.fn.setreg("+", content) == 0 then
+      local _, lines = content:gsub('\n', '\n')
+      local out = string.format("%d line(s) copied to clipboard", lines)
+      vim.api.nvim_echo({{ out }}, true, {})
+    end
   end
-end
-
-function M.selection_to_clip()
-  
 end
 
 return M
