@@ -5,14 +5,7 @@ return {
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
   keys = {
     {
-      "<leader>E",
-      function()
-        require("oil").open(vim.uv.cwd())
-      end,
-      desc = "Open oil.nvim at cwd",
-    },
-    {
-      "<leader>e",
+      "-",
       function()
         require("oil").open()
       end,

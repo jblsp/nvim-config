@@ -24,7 +24,6 @@ vim.opt.signcolumn = "yes" -- Always enable sign column
 vim.opt.smartcase = true -- Case sensitive searching if \C or one or more capital letters in search
 vim.opt.smoothscroll = true -- scroll by screen line rather than by text line when 'wrap' is set
 vim.opt.spelllang = { "en" }
-vim.opt.softtabstop = -1
 vim.opt.termguicolors = true
 vim.opt.undofile = true -- Save undo history for files
 vim.opt.undolevels = 10000
