@@ -9,7 +9,7 @@ return {
       desc = "Delete current buffer",
     },
     {
-      "<leader>bD",
+      "<leader>bo",
       function()
         Snacks.bufdelete.other()
       end,
@@ -23,7 +23,7 @@ return {
       desc = "Wipeout current buffer",
     },
     {
-      "<leader>bW",
+      "<leader>bO",
       function()
         Snacks.bufdelete.other({ wipe = true })
       end,

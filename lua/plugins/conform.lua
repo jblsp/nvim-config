@@ -4,15 +4,14 @@ return {
   event = "BufWritePre",
   cmd = { "ConformInfo" },
   init = function()
-    vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+    vim.opt.formatexpr = [[v:lua.require'conform'.formatexpr()]]
   end,
   keys = {
     {
       "<leader>f",
       function()
-        if require("conform").format() then
-          vim.cmd("w")
-        end
+        require("conform").format()
+        vim.cmd("w")
       end,
       desc = "Format and write buffer",
     },
@@ -31,6 +30,7 @@ return {
       markdown = { "prettierd" },
       html = { "prettierd" },
       javascript = { "prettierd" },
+      typescript = { "prettierd" },
       nix = { "alejandra" },
       java = { lsp_format = "fallback" },
     },

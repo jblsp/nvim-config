@@ -19,6 +19,7 @@ return {
             notes = "~/neorg",
           },
           default_workspace = "neorg",
+          use_popup = false,
         },
       },
     },

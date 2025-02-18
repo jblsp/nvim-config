@@ -12,14 +12,6 @@ autocmd("TextYankPost", {
   end,
 })
 
-autocmd("DirChanged", {
-  desc = "Send notification on dir change",
-  group = augroup("dir-change-notif"),
-  callback = function(args)
-    vim.notify("cwd set to " .. args.file, vim.log.levels.INFO, { title = "cwd" })
-  end,
-})
-
 local cmdlinenrs_group = augroup("cmdlinenrs")
 local cmdline_debounce_timer
 autocmd("CmdlineEnter", {
@@ -63,7 +55,9 @@ autocmd("BufWritePre", {
     local file = vim.uv.fs_realpath(event.match) or event.match
     local parent = vim.fn.fnamemodify(file, ":p:h")
     if vim.fn.isdirectory(parent) == 0 then
-      if vim.fn.confirm("Directory " .. parent .. " does not exist. Would you like to create it?", "&Yes\n&No") == 1 then
+      if
+        vim.fn.confirm("Directory " .. parent .. " does not exist. Would you like to create it?", "&Yes\n&No") == 1
+      then
         vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
       end
     end

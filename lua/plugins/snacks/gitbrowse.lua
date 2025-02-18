@@ -2,11 +2,11 @@ return {
   "snacks.nvim",
   keys = {
     {
-      "<leader>gB",
-      function()
+      "<leader>gx",
+     function()
         Snacks.gitbrowse()
       end,
-      desc = "Git Browse",
+      desc = "Open current repo in browser",
     },
   },
 }

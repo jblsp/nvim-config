@@ -13,14 +13,4 @@ return {
       },
     },
   },
-  { -- blink completion source
-    "saghen/blink.cmp",
-    opts = function(_, opts)
-      table.insert(opts.sources.completion.enabled_providers, "lazydev")
-      opts.providers = vim.tbl_deep_extend("force", opts.providers or {}, {
-        lsp = { fallback_for = { "lazydev" } },
-        lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-      })
-    end,
-  },
 }

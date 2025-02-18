@@ -2,7 +2,9 @@ return {
   "stevearc/oil.nvim",
   version = "*",
   lazy = false,
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  dependencies = {
+    { "echasnovski/mini.icons", opts = {} },
+  },
   keys = {
     {
       "-",
