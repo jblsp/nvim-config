@@ -1,1 +1,1 @@
-return util.colorscheme.lazy_spec("sainnhe/gruvbox-material")
+return util.colorscheme.lazy_spec("sainnhe/gruvbox-material", {setup = false})

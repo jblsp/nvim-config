@@ -40,12 +40,12 @@ function M.lazy_spec(short_url, clrs_spec)
     priority = 1000,
     lazy = not active,
     pin = not active,
-    opts = clrs_spec.opts or {},
+    opts = clrs_spec.opts or clrs_spec.setup ~= false and {},
   }
 
   if active then
     lazy_spec["config"] = function()
-      vim.cmd.colorscheme(vim.g.colorscheme)
+      vim.cmd.colorscheme(clrs_spec.style or vim.g.colorscheme)
     end
   end
 
