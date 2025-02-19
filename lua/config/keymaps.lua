@@ -15,6 +15,7 @@ map("n", "[t", "<cmd>tabprev<cr>", { desc = "Previous tab" })
 map("n", "]t", "<cmd>tabnext<cr>", { desc = "Next tab" })
 map("n", "<leader>td", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
+map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 
 -- Resize window using arrow keys
 map("n", "<Up>", "<cmd>resize -2<cr>", { desc = "Decrease window height by 2" })

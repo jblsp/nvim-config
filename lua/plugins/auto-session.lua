@@ -2,6 +2,9 @@ return {
   "rmagatti/auto-session",
   version = false, -- the latest release v2.5.0 is missing some features i'm using
   lazy = false,
+  init = function()
+    vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+  end,
   keys = {
     {
       "<leader>ss",
@@ -31,7 +34,4 @@ return {
       end,
     },
   },
-  init = function()
-    vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-  end,
 }
