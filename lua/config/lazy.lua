@@ -42,8 +42,5 @@ require("lazy").setup({
   custom_keys = {
     ["<localleader>l"] = false,
     ["<localleader>t"] = false,
-    ["q"] = function()
-      vim.cmd("q")
-    end,
   },
 })
