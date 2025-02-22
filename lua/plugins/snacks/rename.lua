@@ -9,7 +9,7 @@ return {
       desc = "Rename File",
     },
   },
-  config = function()
+  init = function()
     vim.api.nvim_create_autocmd("User", {
       pattern = "OilActionsPost",
       callback = function(event)

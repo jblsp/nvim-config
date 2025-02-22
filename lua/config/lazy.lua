@@ -29,7 +29,6 @@ require("lazy").setup({
   },
   performance = {
     rtp = {
-      paths = { vim.env.NVIM_TREESITTER_PARSERS },
       disabled_plugins = {
         "netrw",
         "netrwPlugin",
