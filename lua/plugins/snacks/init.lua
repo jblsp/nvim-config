@@ -3,5 +3,5 @@ return {
   version = "*",
   priority = 1000,
   lazy = false,
-  import = "plugins.snacks",
+  import = vim.g.lazy_plugins .. ".snacks",
 }

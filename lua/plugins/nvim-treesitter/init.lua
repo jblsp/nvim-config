@@ -3,5 +3,5 @@ return {
   version = "*",
   build = ":TSUpdate",
   event = "VeryLazy",
-  import = "plugins.nvim-treesitter",
+  import = vim.g.lazy_plugins .. ".nvim-treesitter",
 }
