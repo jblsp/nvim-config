@@ -17,12 +17,13 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "colorschemes" },
   },
   defaults = {
     lazy = true,
   },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
-  install = { colorscheme = { vim.g.colorscheme } },
+  install = { colorscheme = { vim.g.startup_colors } },
   checker = { enabled = true },
   rocks = {
     hererocks = false,

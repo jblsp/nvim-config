@@ -18,14 +18,14 @@ map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 
 -- Resize window using arrow keys
-map("n", "<Up>", "<cmd>resize -2<cr>", { desc = "Decrease window height by 2" })
-map("n", "<Down>", "<cmd>resize +2<cr>", { desc = "Increase window height by 2" })
-map("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width by 2" })
-map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width by 2" })
-map("n", "<S-Up>", "<cmd>resize -6<cr>", { desc = "Decrease window height by 6" })
-map("n", "<S-Down>", "<cmd>resize +6<cr>", { desc = "Increase window height by 6" })
-map("n", "<S-Left>", "<cmd>vertical resize -6<cr>", { desc = "Decrease window width by 6" })
-map("n", "<S-Right>", "<cmd>vertical resize +6<cr>", { desc = "Increase window width by 6" })
+-- map("n", "<Up>", "<cmd>resize -2<cr>", { desc = "Decrease window height by 2" })
+-- map("n", "<Down>", "<cmd>resize +2<cr>", { desc = "Increase window height by 2" })
+-- map("n", "<Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width by 2" })
+-- map("n", "<Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width by 2" })
+-- map("n", "<S-Up>", "<cmd>resize -6<cr>", { desc = "Decrease window height by 6" })
+-- map("n", "<S-Down>", "<cmd>resize +6<cr>", { desc = "Increase window height by 6" })
+-- map("n", "<S-Left>", "<cmd>vertical resize -6<cr>", { desc = "Decrease window width by 6" })
+-- map("n", "<S-Right>", "<cmd>vertical resize +6<cr>", { desc = "Increase window width by 6" })
 
 -- Clipboard
 map("n", "<leader>cc", util.fn.anon_to_clip, { desc = 'Copy anon register (") to system clipboard' })

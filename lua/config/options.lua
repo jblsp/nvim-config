@@ -1,5 +1,5 @@
 -- Globals
-vim.g.colorscheme = "tokyonight" -- Can either be a built-in colorscheme or a plugin from /lua/plugins/colorschemes
+vim.g.startup_colors = "duskfox"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
@@ -25,7 +25,6 @@ vim.opt.signcolumn = "yes" -- Always enable sign column
 vim.opt.smartcase = true -- Case sensitive searching if \C or one or more capital letters in search
 vim.opt.smoothscroll = true -- scroll by screen line rather than by text line when 'wrap' is set
 vim.opt.spelllang = { "en" }
-vim.opt.termguicolors = true
 vim.opt.undofile = true -- Save undo history for files
 vim.opt.undolevels = 10000
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode

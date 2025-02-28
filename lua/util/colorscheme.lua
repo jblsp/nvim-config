@@ -31,23 +31,14 @@ function M.lazy_spec(short_url, clrs_spec)
     clrs_spec["name"] = get_name(short_url)
   end
 
-  local active = clrs_spec.name == vim.g.colorscheme
-
   local lazy_spec = {
     [1] = short_url,
     main = clrs_spec.name,
     name = "colorschemes." .. clrs_spec.name,
     priority = 1000,
-    lazy = not active,
-    pin = not active,
+    lazy = true,
     opts = clrs_spec.opts or clrs_spec.setup ~= false and {},
   }
-
-  if active then
-    lazy_spec["config"] = function()
-      vim.cmd.colorscheme(clrs_spec.style or vim.g.colorscheme)
-    end
-  end
 
   return lazy_spec
 end
