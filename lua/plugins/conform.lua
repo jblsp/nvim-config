@@ -3,9 +3,6 @@ return {
   version = "*",
   event = "BufWritePre",
   cmd = { "ConformInfo" },
-  init = function()
-    vim.opt.formatexpr = [[v:lua.require'conform'.formatexpr()]]
-  end,
   keys = {
     {
       "<leader>f",
@@ -29,6 +26,7 @@ return {
       html = { "prettier" },
       java = { lsp_format = "fallback" },
       javascript = { "prettier" },
+      json = { "prettier" },
       lua = { "stylua" },
       markdown = { "prettier" },
       nix = { "alejandra" },
@@ -42,4 +40,8 @@ return {
       async = true,
     },
   },
+  config = function(_, opts)
+    require("conform").setup(opts)
+    vim.opt.formatexpr = [[v:lua.require'conform'.formatexpr()]]
+  end,
 }
