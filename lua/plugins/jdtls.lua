@@ -6,6 +6,11 @@ return {
       pattern = "java",
       group = vim.api.nvim_create_augroup("jdtls", { clear = true }),
       callback = function()
+        if vim.fn.executable("java") == 0 then
+          vim.notify("Missing JRE, jdtls cannot attach", vim.log.levels.WARN)
+          return
+        end
+
         local nvim_data = vim.fn.stdpath("data") .. "/jdtls"
         local jdtls_path = vim.fn.fnamemodify(vim.fn.exepath("jdtls"), ":p:h") .. "/../share/java/jdtls"
 
@@ -36,10 +41,8 @@ return {
         local data_path = nvim_data .. vim.fn.fnamemodify(root_dir or "", ":p:h:t")
 
         require("jdtls").start_or_attach({
-          -- The command that starts the language server
-          -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
           cmd = {
-            "java", -- assuming java is in PATH
+            "java",
             "-Declipse.application=org.eclipse.jdt.ls.core.id1",
             "-Dosgi.bundles.defaultStartLevel=4",
             "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -61,24 +64,6 @@ return {
 
           root_dir = root_dir,
 
-          -- Here you can configure eclipse.jdt.ls specific settings
-          -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-          -- for a list of options
-          settings = {
-            java = {},
-          },
-
-          -- Language server `initializationOptions`
-          -- You need to extend the `bundles` with paths to jar files
-          -- if you want to use additional eclipse.jdt.ls plugins.
-          --
-          -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-          --
-          -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
-          init_options = {
-            bundles = {},
-          },
-
           on_attach = function(_, bufnr)
             vim.api.nvim_create_autocmd("LspRequest", {
               buffer = bufnr,
@@ -99,15 +84,11 @@ return {
               vim.keymap.set(mode, lhs, rhs, opts)
             end
 
-            map("n", "lev", function()
-              require("jdtls").extract_variable()
-            end, { desc = "Extract Variable" })
-            map("n", "lec", function()
-              require("jdtls").extract_constant()
-            end, { desc = "Extract Constant" })
-            map("n", "lem", function()
-              require("jdtls").extract_method()
-            end, { desc = "Extract Method" })
+            -- stylua: ignore start
+            map("n", "lev", function() require("jdtls").extract_variable() end, { desc = "Extract Variable" })
+            map("n", "lec", function() require("jdtls").extract_constant() end, { desc = "Extract Constant" })
+            map("n", "lem", function() require("jdtls").extract_method() end, { desc = "Extract Method" })
+            -- stylua: ignore end
           end,
         })
       end,
