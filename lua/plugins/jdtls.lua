@@ -11,9 +11,11 @@ return {
           return
         end
 
-        local nvim_data = vim.fn.stdpath("data") .. "/jdtls"
+        local cache_path = vim.fn.stdpath("cache") .. "/jdtls"
+        local config_path = cache_path .. "/config"
         local jdtls_path = vim.fn.fnamemodify(vim.fn.exepath("jdtls"), ":p:h") .. "/../share/java/jdtls"
 
+        -- this should be changed to retrieve the root with the root function from lspconfig
         local root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew", "pom.xml" })
         if root_dir == nil or root_dir == vim.env.HOME then
           root_dir = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":h")
@@ -23,22 +25,25 @@ return {
           return name:match("org.eclipse.equinox.launcher_%w+")
         end, { path = jdtls_path .. "/plugins/" })[1]
 
-        local uname = vim.uv.os_uname()
-        local os = ""
-        if uname.sysname == "Darwin" then
+        local sysname = vim.uv.os_uname().sysname
+        if sysname == "Darwin" then
           os = "_mac"
-        elseif uname.sysname == "Windows_NT" then
+        elseif sysname == "Windows_NT" then
           os = "_win"
-        elseif uname.sysname == "Linux" then
+        elseif sysname == "Linux" then
           os = "_linux"
+        else
+          os = ""
         end
 
-        -- jdtls wants the config path to be mutable so I symlink the config file in a new config directory
-        vim.uv.fs_symlink(jdtls_path .. "/config" .. os .. "/config.ini", nvim_data .. "/config/config.ini")
-        local config_path = nvim_data .. "/config"
+        -- jdtls wants the config path to be mutable (this fixes jdtls installed by nix)
+        -- TODO: jdtls still breaks on first launch so i think this function is running asynchronously
+        -- it also might just be better to copy the config.ini file instead of symlinking it
+        vim.uv.fs_symlink(jdtls_path .. "/config" .. os .. "/config.ini", config_path .. "/config.ini")
 
         -- should probably serialize the whole dirname to avoid collisions
-        local data_path = nvim_data .. vim.fn.fnamemodify(root_dir or "", ":p:h:t")
+        local project_hash = vim.base64.encode(root_dir)
+        local data_path = cache_path .. "/projects/" .. project_hash
 
         require("jdtls").start_or_attach({
           cmd = {
@@ -85,9 +90,9 @@ return {
             end
 
             -- stylua: ignore start
-            map("n", "lev", function() require("jdtls").extract_variable() end, { desc = "Extract Variable" })
-            map("n", "lec", function() require("jdtls").extract_constant() end, { desc = "Extract Constant" })
-            map("n", "lem", function() require("jdtls").extract_method() end, { desc = "Extract Method" })
+            map("n", "<localleader>ev", function() require("jdtls").extract_variable() end, { desc = "Extract Variable" })
+            map("n", "<localleader>ec", function() require("jdtls").extract_constant() end, { desc = "Extract Constant" })
+            map("n", "<localleader>em", function() require("jdtls").extract_method() end, { desc = "Extract Method" })
             -- stylua: ignore end
           end,
         })
