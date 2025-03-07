@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  version = "12.*",
+  version = "*",
   dependencies = "rafamadriz/friendly-snippets",
   event = { "InsertEnter", "CmdlineEnter" },
   init = function()
