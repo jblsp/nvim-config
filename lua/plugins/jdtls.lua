@@ -25,12 +25,12 @@ return {
           return name:match("org.eclipse.equinox.launcher_%w+")
         end, { path = jdtls_path .. "/plugins/" })[1]
 
-        local sysname = vim.uv.os_uname().sysname
-        if sysname == "Darwin" then
+        local uname = vim.uv.os_uname()
+        if uname.sysname == "Darwin" then
           os = "_mac"
-        elseif sysname == "Windows_NT" then
+        elseif uname.sysname == "Windows_NT" then
           os = "_win"
-        elseif sysname == "Linux" then
+        elseif uname.sysname == "Linux" then
           os = "_linux"
         else
           os = ""
@@ -38,7 +38,6 @@ return {
 
         -- jdtls wants the config path to be mutable (this fixes jdtls installed by nix)
         -- TODO: jdtls still breaks on first launch so i think this function is running asynchronously
-        -- it also might just be better to copy the config.ini file instead of symlinking it
         vim.uv.fs_symlink(jdtls_path .. "/config" .. os .. "/config.ini", config_path .. "/config.ini")
 
         -- should probably serialize the whole dirname to avoid collisions
