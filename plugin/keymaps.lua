@@ -50,3 +50,20 @@ map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result
 map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+
+-- Snippets
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
+  if vim.snippet.active({ direction = 1 }) then
+    return "<cmd>lua vim.snippet.jump(1)<cr>"
+  else
+    return "<Tab>"
+  end
+end, { expr = true })
+
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+  if vim.snippet.active({ direction = -1 }) then
+    return "<cmd>lua vim.snippet.jump(-1)<cr>"
+  else
+    return "<S-Tab>"
+  end
+end, { expr = true })
