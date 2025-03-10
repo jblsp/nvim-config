@@ -28,7 +28,17 @@ map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 -- map("n", "<S-Right>", "<cmd>vertical resize +6<cr>", { desc = "Increase window width by 6" })
 
 -- Clipboard
-map("n", "<leader>cc", util.fn.anon_to_clip, { desc = 'Copy anon register (") to system clipboard' })
+map("n", "<leader>cc", function()
+  local content = vim.fn.getreg('"')
+  if content ~= "" then
+    if vim.fn.setreg("+", content) == 0 then
+      local _, lines = content:gsub("\n", "\n")
+      local out = string.format("%d line(s) copied to clipboard", lines)
+      vim.api.nvim_echo({ { out } }, true, {})
+    end
+  end
+end, { desc = 'Copy anon register (") to system clipboard' })
+
 map({ "n", "x" }, "<leader>cy", '"+y', { desc = "Yank to system clipboard" })
 map("n", "<leader>cp", '"+p', { desc = "Paste from system clipboard" })
 map("x", "<leader>cp", '"+P', { desc = "Paste from system clipboard" })
@@ -39,9 +49,11 @@ map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add commen
 map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add comment above" })
 
 -- LSP mappings
-map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-map("n", "<leader>rs", vim.lsp.buf.rename, { desc = "Rename symbol" })
-map({ "n", "x" }, "<leader>lc", vim.lsp.buf.code_action, { desc = "Code action" })
+-- stylua: ignore start
+map("n", "gD", function() vim.lsp.buf.declaration() end, { desc = "Go to declaration" })
+map("n", "<leader>rs", function() vim.lsp.buf.rename() end, { desc = "Rename symbol" })
+map({ "n", "x" }, "<leader>lc", function() vim.lsp.buf.code_action() end, { desc = "Code action" })
+-- stylua: ignore end
 
 -- (from LazyVim) https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
@@ -67,3 +79,13 @@ vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
     return "<S-Tab>"
   end
 end, { expr = true })
+
+-- diagnostics
+-- stylua: ignore start
+map("n", "]d", function() util.fn.goto_diagnostic(true) end, { desc = "Next Diagnostic" })
+map("n", "[d", function() util.fn.goto_diagnostic(false) end, { desc = "Prev Diagnostic" })
+map("n", "]e", function() util.fn.goto_diagnostic(true, "ERROR") end, { desc = "Next Error" })
+map("n", "[e", function() util.fn.goto_diagnostic(false, "ERROR") end, { desc = "Prev Error" })
+map("n", "]w", function() util.fn.goto_diagnostic(true, "WARN") end, { desc = "Next Warning" })
+map("n", "[w", function() util.fn.goto_diagnostic(false, "WARN") end, { desc = "Prev Warning" })
+-- stylua: ignore end

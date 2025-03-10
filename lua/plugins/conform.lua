@@ -32,6 +32,8 @@ return {
       nix = { "alejandra" },
       python = { "black", "isort" },
       typescript = { "prettier" },
+      cpp = { "clang-format" },
+      c = { "clang-format" },
     },
     notify_on_error = true,
     notify_no_formatter = true,

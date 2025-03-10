@@ -19,15 +19,11 @@ function M.in_git_project()
   return vim.fn.system(cmd) == "true\n"
 end
 
-function M.anon_to_clip()
-  local content = vim.fn.getreg('"')
-  if content ~= "" then
-    if vim.fn.setreg("+", content) == 0 then
-      local _, lines = content:gsub('\n', '\n')
-      local out = string.format("%d line(s) copied to clipboard", lines)
-      vim.api.nvim_echo({{ out }}, true, {})
-    end
-  end
+function M.goto_diagnostic(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  go({ severity = severity })
+  vim.diagnostic.open_float()
 end
 
 return M

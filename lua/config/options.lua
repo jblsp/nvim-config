@@ -16,7 +16,8 @@ vim.opt.inccommand = "split"
 vim.opt.infercase = true
 vim.opt.laststatus = 3 -- Global status line
 vim.opt.linebreak = true
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
+vim.opt.mousemodel = "extend"
 vim.opt.number = true -- Line numbers
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
@@ -29,3 +30,5 @@ vim.opt.undofile = true -- Save undo history for files
 vim.opt.undolevels = 10000
 vim.opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 vim.opt.wrap = false
+
+vim.diagnostic.config({ virtual_text = false, underline = true })

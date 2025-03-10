@@ -19,6 +19,7 @@ return {
       nixd = {},
       pyright = {},
       ts_ls = {},
+      clangd = {},
     }
 
     for server_name, config in pairs(servers) do
