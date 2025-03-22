@@ -6,9 +6,6 @@ require("lazy").setup({
   spec = {
     { import = vim.g.lazy_plugins },
   },
-  defaults = {
-    lazy = true,
-  },
   lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
   install = { colorscheme = { vim.g.startup_colors } },
   checker = { enabled = true },
