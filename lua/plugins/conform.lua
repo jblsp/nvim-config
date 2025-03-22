@@ -1,7 +1,6 @@
 return {
   "stevearc/conform.nvim",
   version = "*",
-  event = "BufWritePre",
   cmd = { "ConformInfo" },
   keys = {
     {
@@ -36,7 +35,7 @@ return {
       c = { "clang-format" },
     },
     notify_on_error = true,
-    notify_no_formatter = true,
+    notify_no_formatters = true,
     default_format_opts = {
       lsp_format = "never",
       async = true,

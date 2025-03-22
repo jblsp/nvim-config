@@ -12,6 +12,9 @@ require("lazy").setup({
   rocks = {
     hererocks = false,
   },
+  change_detection = {
+    notify = false,
+  },
   performance = {
     rtp = {
       disabled_plugins = {
