@@ -1,6 +1,5 @@
 return {
-  "echasnovski/mini.operators",
-  enabled = false,
+  "echasnovski/mini.surround",
   version = "*",
   event = "VeryLazy",
   opts = {},

@@ -1,7 +1,6 @@
-local autocmd = util.autocmd
+local autocmd = require("joe.util.autocmd")
 
-local augroup = util.autocmd.group("correct-terminal-colors")
-
+local augroup = autocmd.group("correct-terminal-colors")
 autocmd.create({ "UIEnter", "ColorScheme" }, {
   -- see: https://www.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/"
   desc = "Corrects terminal background color according to colorscheme",

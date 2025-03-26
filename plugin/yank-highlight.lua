@@ -1,4 +1,4 @@
-local autocmd = util.autocmd
+local autocmd = require("joe.util.autocmd")
 
 autocmd.create("TextYankPost", {
   desc = "Highlight when yanking text",

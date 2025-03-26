@@ -1,4 +1,4 @@
-local autocmd = util.autocmd
+local autocmd = require("joe.util.autocmd")
 
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Restore cursor to position from last edit",

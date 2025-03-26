@@ -1,3 +1,5 @@
+local in_git_project = require("joe.util.fn").in_git_project
+
 return {
   "rmagatti/auto-session",
   version = false, -- the latest release v2.5.0 is missing some features i'm using
@@ -14,7 +16,7 @@ return {
   },
   opts = {
     auto_restore = false,
-    auto_create = util.fn.in_git_project,
+    auto_create = in_git_project,
     use_git_branch = true,
     suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
     bypass_save_filetypes = { "dashboard", "alpha", "netrw", "minifiles" },

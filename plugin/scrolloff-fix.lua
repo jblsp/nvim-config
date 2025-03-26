@@ -1,4 +1,4 @@
-local autocmd = util.autocmd
+local autocmd = require("joe.util.autocmd")
 
 autocmd.create({ "CursorMoved", "CursorMovedI", "WinScrolled" }, {
   desc = "Fix scrolloff when you are at the EOF",

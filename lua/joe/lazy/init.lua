@@ -1,8 +1,11 @@
-vim.g.lazy_plugins = "plugins"
+vim.g.lazy_plugins = "joe.lazy.plugins"
 
 load(vim.fn.system("curl -s https://raw.githubusercontent.com/folke/lazy.nvim/main/bootstrap.lua"))()
 
 require("lazy").setup({
+  defaults = {
+    lazy = true,
+  },
   spec = {
     { import = vim.g.lazy_plugins },
   },
@@ -22,12 +25,5 @@ require("lazy").setup({
         "netrwPlugin",
       },
     },
-  },
-  ui = {
-    backdrop = 85,
-  },
-  custom_keys = {
-    ["<localleader>l"] = false,
-    ["<localleader>t"] = false,
   },
 })

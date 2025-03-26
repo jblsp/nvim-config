@@ -2,6 +2,9 @@ return {
   "stevearc/conform.nvim",
   version = "*",
   cmd = { "ConformInfo" },
+  init = function()
+    vim.opt.formatexpr = [[v:lua.require'conform'.formatexpr()]]
+  end,
   keys = {
     {
       "<leader>f",
@@ -41,8 +44,4 @@ return {
       async = true,
     },
   },
-  config = function(_, opts)
-    require("conform").setup(opts)
-    vim.opt.formatexpr = [[v:lua.require'conform'.formatexpr()]]
-  end,
 }

@@ -6,7 +6,7 @@ return {
      function()
         Snacks.gitbrowse()
       end,
-      desc = "Open current repo in browser",
+      desc = "Open current git repo in browser",
     },
   },
 }

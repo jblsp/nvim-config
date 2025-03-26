@@ -5,6 +5,22 @@ return {
     on_attach = function(bufnr)
       local gitsigns = require("gitsigns")
 
+      local function next_hunk()
+        if vim.wo.diff then
+          vim.cmd.normal({ "]h", bang = true })
+        else
+          gitsigns.nav_hunk("next")
+        end
+      end
+
+      local function prev_hunk()
+        if vim.wo.diff then
+          vim.cmd.normal({ "[c", bang = true })
+        else
+          gitsigns.nav_hunk("prev")
+        end
+      end
+
       local function map(mode, lhs, rhs, opts)
         opts = opts or {}
         opts.buffer = bufnr
@@ -14,22 +30,8 @@ return {
         vim.keymap.set(mode, lhs, rhs, opts)
       end
 
-      map("n", "]h", function()
-        if vim.wo.diff then
-          vim.cmd.normal({ "]h", bang = true })
-        else
-          gitsigns.nav_hunk("next")
-        end
-      end, { desc = "Next hunk" })
-
-      map("n", "[h", function()
-        if vim.wo.diff then
-          vim.cmd.normal({ "[c", bang = true })
-        else
-          gitsigns.nav_hunk("prev")
-        end
-      end, { desc = "Previous hunk" })
-
+      map("n", "]h", next_hunk, { desc = "Next hunk" })
+      map("n", "[h", prev_hunk, { desc = "Previous hunk" })
       map("n", "<leader>ga", gitsigns.stage_hunk, { desc = "Stage hunk" })
       map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
       map("v", "<leader>ga", function()

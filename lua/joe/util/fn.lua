@@ -19,11 +19,4 @@ function M.in_git_project()
   return vim.fn.system(cmd) == "true\n"
 end
 
-function M.goto_diagnostic(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  go({ severity = severity })
-  vim.diagnostic.open_float()
-end
-
 return M

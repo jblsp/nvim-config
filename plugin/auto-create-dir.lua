@@ -1,4 +1,4 @@
-local autocmd = util.autocmd
+local autocmd = require("joe.util.autocmd")
 
 autocmd.create("BufWritePre", {
   desc = "Auto create directory when saving a file",

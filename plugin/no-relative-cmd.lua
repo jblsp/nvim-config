@@ -1,4 +1,4 @@
-local autocmd = util.autocmd
+local autocmd = require("joe.util.autocmd")
 
 local augroup = autocmd.group("cmdlinenrs")
 local cmdline_debounce_timer

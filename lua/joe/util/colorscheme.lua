@@ -12,7 +12,7 @@ local function get_name(url)
   if slash then
     local repo_name = name:sub(#name - slash + 2)
 
-    -- if the repo name is in this list, then we take the org name instead
+    -- if the repo name is in this list, then take the org name instead
     local org_names = { "nvim", "neovim" }
     if vim.tbl_contains(org_names, repo_name) then
       return name:sub(1, #name - slash)
