@@ -1,8 +1,6 @@
-local autocmd = require("joe.util.autocmd")
-
-autocmd.create({ "CursorMoved", "CursorMovedI", "WinScrolled" }, {
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "WinScrolled" }, {
   desc = "Fix scrolloff when you are at the EOF",
-  group = autocmd.group("scroll-eof"),
+  group = vim.api.nvim_create_augroup("scroll-eof", { clear = true }),
   callback = function()
     if vim.api.nvim_win_get_config(0).relative ~= "" then
       return

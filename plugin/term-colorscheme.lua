@@ -1,7 +1,5 @@
-local autocmd = require("joe.util.autocmd")
-
-local augroup = autocmd.group("correct-terminal-colors")
-autocmd.create({ "UIEnter", "ColorScheme" }, {
+local augroup = vim.api.nvim_create_augroup("correct-terminal-colors", { clear = true })
+vim.api.nvim_create_autocmd({ "UIEnter", "ColorScheme" }, {
   -- see: https://www.reddit.com/r/neovim/comments/1ehidxy/you_can_remove_padding_around_neovim_instance/"
   desc = "Corrects terminal background color according to colorscheme",
   group = augroup,
@@ -11,7 +9,7 @@ autocmd.create({ "UIEnter", "ColorScheme" }, {
     end
   end,
 })
-autocmd.create("UILeave", {
+vim.api.nvim_create_autocmd("UILeave", {
   group = augroup,
   callback = function()
     io.write("\027]111\027\\")

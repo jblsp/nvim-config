@@ -1,8 +1,6 @@
-local autocmd = require("joe.util.autocmd")
-
-autocmd.create("TextYankPost", {
+vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking text",
-  group = autocmd.group("highlight-yank"),
+  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,

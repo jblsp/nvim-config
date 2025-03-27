@@ -1,8 +1,6 @@
-local autocmd = require("joe.util.autocmd")
-
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Restore cursor to position from last edit",
-  group = autocmd.group("cursor-restore"),
+  group = vim.api.nvim_create_augroup("cursor-restore", { clear = true }),
   callback = function(args)
     local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
     local line_count = vim.api.nvim_buf_line_count(args.buf)

@@ -1,8 +1,6 @@
-local autocmd = require("joe.util.autocmd")
-
-autocmd.create("BufWritePre", {
+vim.api.nvim_create_autocmd("BufWritePre", {
   desc = "Auto create directory when saving a file",
-  group = autocmd.group("auto-create-dir"),
+  group = vim.api.nvim_create_augroup("auto-create-dir", { clear = true }),
   callback = function(event)
     if event.match:match("^%w%w+:[\\/][\\/]") then -- ignore remote files
       return
