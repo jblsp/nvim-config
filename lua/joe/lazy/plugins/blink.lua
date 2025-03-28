@@ -10,6 +10,7 @@ return {
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
     },
+    cmdline = { enabled = false },
     keymap = {
       preset = "none",
       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
