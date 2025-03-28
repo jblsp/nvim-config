@@ -1,9 +1,7 @@
-local custom_pickers
-
 return {
   "nvim-telescope/telescope.nvim",
-  version = "*",
-  event = "VeryLazy",
+  -- version = "*", -- updates to LSP features are not in latest tag
+  cmd = "Telescope",
   dependencies = {
     { "nvim-lua/plenary.nvim", version = "*" },
     "nvim-tree/nvim-web-devicons",
@@ -24,7 +22,7 @@ return {
       end,
       custom = function(picker)
         return function()
-          custom_pickers[picker]()
+          vim.g.telescope_custom_pickers[picker]()
         end
       end,
     }
@@ -37,7 +35,11 @@ return {
       { "<leader>sg", pickers.builtin("live_grep"), desc = "Grep cwd" },
       { "<leader>bs", pickers.builtin("buffers"), desc = "Search buffers" },
       { "<leader>/", pickers.builtin("current_buffer_fuzzy_find"), desc = "Fuzzily search buffer" },
+      { "<leader>sc", pickers.builtin("colorscheme"), desc = "Search colorschemes" },
       { "z=", pickers.builtin("spell_suggest"), desc = "Spelling suggestions" },
+      { "gri", pickers.builtin("lsp_implementations"), desc = "View implementation" },
+      { "g0", pickers.builtin("lsp_document_symbols"), desc = "View document symbols" },
+      { "grr", pickers.builtin("lsp_references"), desc = "View references" },
       { "<leader>sn", pickers.custom("find_config_files"), desc = "Search config files" },
       { "<leader>sG", pickers.custom("live_grep_open_buffers"), desc = "Grep open buffers" },
       { "<leader>sd", pickers.custom("find_directories"), desc = "Search directories" },
@@ -57,18 +59,24 @@ return {
         },
       },
       pickers = {
-        buffers = {
+        buffers = themes.get_dropdown({
           initial_mode = "normal",
           sort_mru = true,
-        },
-        spell_suggest = vim.tbl_deep_extend("force", themes.get_dropdown(), { initial_mode = "normal" }),
+          previewer = false,
+        }),
+        spell_suggest = themes.get_dropdown({
+          initial_mode = "normal",
+        }),
+        current_buffer_fuzzy_find = themes.get_ivy({
+          layout_config = { height = 0.35, bottom_pane = { preview_width = 0.25 } },
+        }),
       },
     }
   end,
   config = function(_, opts)
     local builtin = require("telescope.builtin")
 
-    custom_pickers = {
+    vim.g.telescope_custom_pickers = {
       ["live_grep_open_buffers"] = function()
         builtin.live_grep({
           grep_open_files = true,
@@ -100,8 +108,8 @@ return {
 
     local function setup_telescope()
       require("telescope").setup(opts)
-      for _, extn in ipairs(extensions) do
-        require("telescope").load_extension(extn)
+      for _, ext in ipairs(extensions) do
+        require("telescope").load_extension(ext)
       end
     end
 
