@@ -2,7 +2,7 @@ local in_git_project = require("joe.util.fn").in_git_project
 
 return {
   "rmagatti/auto-session",
-  version = false, -- the latest release v2.5.0 is missing some features i'm using
+  version = "*",
   lazy = false,
   init = function()
     vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
