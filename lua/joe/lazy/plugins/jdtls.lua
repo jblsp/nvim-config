@@ -21,7 +21,7 @@ return {
         end
 
         require("jdtls").start_or_attach({
-          cmd = vim.list_extend({ vim.fn.exepath("jdtls") }, proj_args),
+          cmd = vim.list_extend({ vim.fn.exepath("jdtls") }, proj_args or {}),
 
           root_dir = root_dir,
 
@@ -42,10 +42,10 @@ return {
               vim.keymap.set(mode, lhs, rhs, opts)
             end
 
-            -- stylua: ignore start
-            map("n", "<localleader>ev", function() require("jdtls").extract_variable() end, { desc = "Extract Variable" })
-            map("n", "<localleader>ec", function() require("jdtls").extract_constant() end, { desc = "Extract Constant" })
-            map("n", "<localleader>em", function() require("jdtls").extract_method() end, { desc = "Extract Method" })
+              -- stylua: ignore start
+              map("n", "<localleader>ev", function() require("jdtls").extract_variable() end, { desc = "Extract Variable" })
+              map("n", "<localleader>ec", function() require("jdtls").extract_constant() end, { desc = "Extract Constant" })
+              map("n", "<localleader>em", function() require("jdtls").extract_method() end, { desc = "Extract Method" })
             -- stylua: ignore end
           end,
         })
