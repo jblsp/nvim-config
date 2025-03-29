@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "WinScrolled" }, {
   desc = "Fix scrolloff when you are at the EOF",
-  group = vim.api.nvim_create_augroup("scroll-eof", { clear = true }),
+  group = vim.api.nvim_create_augroup("scrolloff-fix", { clear = true }),
   callback = function()
     if vim.api.nvim_win_get_config(0).relative ~= "" then
       return
