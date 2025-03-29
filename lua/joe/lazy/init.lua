@@ -23,7 +23,7 @@ require("lazy").setup({
   spec = {
     { import = vim.g.lazy_plugins },
   },
-  lockfile = vim.fn.stdpath("data") .. "/lazy-lock.json",
+  lockfile = vim.fn.stdpath("config") .. "/lua/joe/lazy/lockfile.json",
   install = { colorscheme = { vim.g.startup_colors } },
   checker = { enabled = true },
   rocks = {
@@ -35,8 +35,11 @@ require("lazy").setup({
   performance = {
     rtp = {
       disabled_plugins = {
+        "gzip",
         "netrw",
         "netrwPlugin",
+        "tarPlugin",
+        "zipPlugin",
       },
     },
   },
