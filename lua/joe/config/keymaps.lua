@@ -1,3 +1,5 @@
+local actions = require("joe.util.actions")
+
 local map = vim.keymap.set
 
 -- escape removes search highlights
@@ -6,7 +8,12 @@ map("n", "<Esc>", "<cmd>noh<cr>")
 -- buffers
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New buffer" })
 map("n", "<leader>bl", "<cmd>b#<cr>", { desc = "Last buffer" })
-map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete buffer and window" })
+map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete buffer and close window" })
+map("n", "<leader>bW", "<cmd>bw<cr>", { desc = "Wipeout buffer and close window" })
+map("n", "<leader>bd", actions.bdelete, { desc = "Delete buffer" })
+map("n", "<leader>bw", actions.bwipeout, { desc = "Wipeout buffer" })
+map("n", "<leader>bo", actions.bdelete_other, { desc = "Delete all other buffers" })
+map("n", "<leader>bO", "", { desc = "Wipeout all other buffers" })
 
 -- tabs
 map("n", "[t", "<cmd>tabprev<cr>", { desc = "Previous tab" })
@@ -16,16 +23,7 @@ map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 
 -- Clipboard
-map("n", "<leader>cc", function()
-  local content = vim.fn.getreg('"')
-  if content ~= "" then
-    if vim.fn.setreg("+", content) == 0 then
-      local _, lines = content:gsub("\n", "\n")
-      local out = string.format("%d line(s) copied to clipboard", lines)
-      vim.api.nvim_echo({ { out } }, true, {})
-    end
-  end
-end, { desc = 'Copy anon register (") to system clipboard' })
+map("n", "<leader>cc", actions.anon_to_clip, { desc = 'Copy anon register (") to system clipboard' })
 
 map({ "n", "x" }, "<leader>cy", '"+y', { desc = "Yank to system clipboard" })
 map("n", "<leader>cp", '"+p', { desc = "Paste from system clipboard" })
