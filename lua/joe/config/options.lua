@@ -25,7 +25,6 @@ o.number = true -- Line numbers
 o.relativenumber = true
 o.scrolloff = 8
 o.shortmess = o.shortmess .. "I" -- Disable startup message
-o.showtabline = 1
 o.signcolumn = "yes" -- Always enable sign column
 o.smartcase = true -- Case sensitive searching if \C or one or more capital letters in search
 o.smoothscroll = true -- scroll by screen line rather than by text line when 'wrap' is set
