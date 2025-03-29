@@ -1,13 +1,13 @@
 local augroup = vim.api.nvim_create_augroup("cmdlinenrs", { clear = true })
-local cmdline_debounce_timer
+local db_timer
 
 vim.api.nvim_create_autocmd("CmdlineEnter", {
   desc = "Disable relative line numbers in command mode",
   group = augroup,
   callback = function()
-    cmdline_debounce_timer = vim.uv.new_timer()
-    if cmdline_debounce_timer then
-      cmdline_debounce_timer:start(
+    db_timer = vim.uv.new_timer()
+    if db_timer then
+      db_timer:start(
         5,
         0,
         vim.schedule_wrap(function()
@@ -24,9 +24,9 @@ vim.api.nvim_create_autocmd("CmdlineEnter", {
 vim.api.nvim_create_autocmd("CmdlineLeave", {
   group = augroup,
   callback = function()
-    if cmdline_debounce_timer then
-      cmdline_debounce_timer:stop()
-      cmdline_debounce_timer = nil
+    if db_timer then
+      db_timer:stop()
+      db_timer = nil
     end
     if vim.o.number then
       vim.o.relativenumber = true

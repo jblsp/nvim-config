@@ -23,18 +23,15 @@ return {
         require("jdtls").start_or_attach({
           cmd = vim.list_extend({ vim.fn.exepath("jdtls") }, proj_args or {}),
 
+          settings = {
+            java = {
+              saveActions = { organizeImports = true },
+            },
+          },
+
           root_dir = root_dir,
 
           on_attach = function(_, bufnr)
-            vim.api.nvim_create_autocmd("LspRequest", {
-              buffer = bufnr,
-              callback = function(args)
-                if args.data.request.method == "textDocument/formatting" then
-                  require("jdtls").organize_imports()
-                end
-              end,
-            })
-
             local function map(mode, lhs, rhs, opts)
               opts = opts or {}
               opts.buffer = bufnr
@@ -46,6 +43,7 @@ return {
               map("n", "<localleader>ev", function() require("jdtls").extract_variable() end, { desc = "Extract Variable" })
               map("n", "<localleader>ec", function() require("jdtls").extract_constant() end, { desc = "Extract Constant" })
               map("n", "<localleader>em", function() require("jdtls").extract_method() end, { desc = "Extract Method" })
+              map("n", "<localleader>o", function() require("jdtls").organize_imports() end, { desc = "Organize imports" })
             -- stylua: ignore end
           end,
         })

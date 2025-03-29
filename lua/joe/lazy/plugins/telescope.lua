@@ -3,10 +3,17 @@ return {
   -- version = "*", -- updates to LSP features are not in latest tag
   cmd = "Telescope",
   dependencies = {
+    -- Dependencies
     { "nvim-lua/plenary.nvim", version = "*" },
     "nvim-tree/nvim-web-devicons",
+
+    -- Extensions
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-ui-select.nvim",
     "debugloop/telescope-undo.nvim",
+
+    -- Modifications
+    { "prochri/telescope-all-recent.nvim", dependencies = { "kkharji/sqlite.lua" } },
   },
   keys = function()
     local pickers = {
@@ -55,6 +62,10 @@ return {
         mappings = {
           n = {
             ["q"] = "close",
+            ["<C-u>"] = "results_scrolling_up",
+            ["<C-d>"] = "results_scrolling_down",
+            ["<C-b>"] = "results_scrolling_up",
+            ["<C-f>"] = "results_scrolling_down",
           },
         },
       },
@@ -114,6 +125,7 @@ return {
     end
 
     setup_extension("ui-select", require("telescope.themes").get_dropdown({}))
+    setup_extension("fzf")
     setup_extension("undo", {
       use_delta = false,
       layout_config = {
@@ -125,5 +137,7 @@ return {
     })
 
     setup_telescope()
+
+    require("telescope-all-recent").setup({})
   end,
 }
