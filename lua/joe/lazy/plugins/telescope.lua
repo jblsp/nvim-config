@@ -11,47 +11,94 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     "nvim-telescope/telescope-ui-select.nvim",
     "debugloop/telescope-undo.nvim",
-
-    -- Modifications
-    { "prochri/telescope-all-recent.nvim", dependencies = { "kkharji/sqlite.lua" } },
   },
   keys = function()
-    local pickers = {
-      builtin = function(picker)
-        return function()
-          require("telescope.builtin")[picker]()
-        end
-      end,
-      ext = function(extension, picker)
-        return function()
-          require("telescope").extensions[extension][picker]()
-        end
-      end,
-      custom = function(picker)
-        return function()
-          vim.g.telescope_custom_pickers[picker]()
-        end
-      end,
-    }
+    ---@param picker string
+    local function builtin(picker)
+      return function()
+        require("telescope.builtin")[picker]()
+      end
+    end
+
+    ---@param extension string
+    ---@param picker string
+    local function ext(extension, picker)
+      return function()
+        require("telescope").extensions[extension][picker]()
+      end
+    end
+
+    ---@param picker string
+    local function custom(picker)
+      return function()
+        vim.g.telescope_custom_pickers[picker]()
+      end
+    end
 
     return {
-      { "<leader>sh", pickers.builtin("help_tags"), desc = "Search help" },
-      { "<leader>sk", pickers.builtin("keymaps"), desc = "Search keymaps" },
-      { "<leader>sf", pickers.builtin("find_files"), desc = "Search files" },
-      { "<leader>sw", pickers.builtin("grep_string"), desc = "Grep current word" },
-      { "<leader>sg", pickers.builtin("live_grep"), desc = "Grep cwd" },
-      { "<leader>bs", pickers.builtin("buffers"), desc = "Search buffers" },
-      { "<leader>/", pickers.builtin("current_buffer_fuzzy_find"), desc = "Fuzzily search buffer" },
-      { "<leader>sc", pickers.builtin("colorscheme"), desc = "Search colorschemes" },
-      { "z=", pickers.builtin("spell_suggest"), desc = "Spelling suggestions" },
-      { "gri", pickers.builtin("lsp_implementations"), desc = "View implementation" },
-      { "g0", pickers.builtin("lsp_document_symbols"), desc = "View document symbols" },
-      { "grr", pickers.builtin("lsp_references"), desc = "View references" },
-      { "<leader>sn", pickers.custom("find_config_files"), desc = "Search config files" },
-      { "<leader>sG", pickers.custom("live_grep_open_buffers"), desc = "Grep open buffers" },
-      { "<leader>sd", pickers.custom("find_directories"), desc = "Search directories" },
-      { "<leader>u", pickers.ext("undo", "undo"), desc = "Undo History" },
+      { "<leader>sh", builtin("help_tags"), desc = "Search help" },
+      { "<leader>sk", builtin("keymaps"), desc = "Search keymaps" },
+      { "<leader>sf", builtin("find_files"), desc = "Search files" },
+      { "<leader>sw", builtin("grep_string"), desc = "Grep current word" },
+      { "<leader>sg", builtin("live_grep"), desc = "Grep cwd" },
+      { "<leader>bs", builtin("buffers"), desc = "Search buffers" },
+      { "<leader>/", builtin("current_buffer_fuzzy_find"), desc = "Fuzzily search buffer" },
+      { "<leader>sc", builtin("colorscheme"), desc = "Search colorschemes" },
+      { "z=", builtin("spell_suggest"), desc = "Spelling suggestions" },
+      { "gri", builtin("lsp_implementations"), desc = "View implementation" },
+      { "g0", builtin("lsp_document_symbols"), desc = "View document symbols" },
+      { "grr", builtin("lsp_references"), desc = "View references" },
+      { "<leader>sn", custom("find_config_files"), desc = "Search config files" },
+      { "<leader>sN", custom("find_config_directories"), desc = "Search config " },
+      { "<leader>sG", custom("live_grep_open_buffers"), desc = "Grep open buffers" },
+      { "<leader>sd", custom("find_directories"), desc = "Search directories" },
+      { "<leader>u", ext("undo", "undo"), desc = "Undo History" },
     }
+  end,
+  init = function()
+    ---@type table
+    vim.g.telescope_custom_pickers = {}
+
+    ---@param name string
+    ---@param picker function
+    local function custom_picker(name, picker)
+      vim.g.telescope_custom_pickers = vim.tbl_deep_extend("force", vim.g.telescope_custom_pickers, {
+        [name] = function()
+          local telescope_modules = {
+            builtin = require("telescope.builtin"),
+          }
+          picker(telescope_modules)
+        end,
+      })
+    end
+
+    custom_picker("live_grep_open_buffers", function(tm)
+      tm.builtin.live_grep({
+        grep_open_files = true,
+        prompt_title = "Live Grep in Open Files",
+      })
+    end)
+
+    custom_picker("find_directories", function(tm)
+      tm.builtin.find_files({
+        find_command = { "fd", "-t", "d" },
+        previewer = false,
+      })
+    end)
+
+    custom_picker("find_config_files", function(tm)
+      tm.builtin.find_files({
+        cwd = vim.fn.stdpath("config"),
+      })
+    end)
+
+    custom_picker("find_config_directories", function(tm)
+      tm.builtin.find_files({
+        cwd = vim.fn.stdpath("config"),
+        find_command = { "fd", "-t", "d" },
+        previewer = false,
+      })
+    end)
   end,
   opts = function(_, _)
     local themes = require("telescope.themes")
@@ -85,36 +132,17 @@ return {
     }
   end,
   config = function(_, opts)
-    local builtin = require("telescope.builtin")
+    ---@type string[]
+    local extensions = {}
 
-    vim.g.telescope_custom_pickers = {
-      ["live_grep_open_buffers"] = function()
-        builtin.live_grep({
-          grep_open_files = true,
-          prompt_title = "Live Grep in Open Files",
-        })
-      end,
-      ["find_config_files"] = function()
-        builtin.find_files({
-          cwd = vim.fn.stdpath("config"),
-        })
-      end,
-      ["find_directories"] = function()
-        builtin.find_files({
-          find_command = { "fd", "-t", "d" },
-          previewer = false,
-        })
-      end,
-    }
-
-    local extensions
-
+    ---@param ext string
+    ---@param ext_opts table?
     local function setup_extension(ext, ext_opts)
       opts.extensions = opts.extensions or {}
       if ext_opts then
         opts.extensions = vim.tbl_deep_extend("force", opts.extensions, { [ext] = ext_opts })
       end
-      extensions = vim.fn.insert(extensions or {}, ext)
+      extensions = vim.fn.insert(extensions, ext)
     end
 
     local function setup_telescope()
@@ -137,7 +165,5 @@ return {
     })
 
     setup_telescope()
-
-    require("telescope-all-recent").setup({})
   end,
 }

@@ -2,7 +2,7 @@ local o = vim.o
 local g = vim.g
 
 -- Globals
-g.startup_colors = "rose-pine-moon"
+g.startup_colors = "rose-pine"
 g.mapleader = vim.keycode("<space>")
 g.maplocalleader = vim.keycode("\\")
 

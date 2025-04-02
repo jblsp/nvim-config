@@ -1,6 +1,12 @@
+---@class Colorscheme.Spec
+---@field name? string
+---@field opts? table
+---@field setup? boolean
+
 local M = {}
 
 -- adapted from lazy.nvim source
+---@param url string
 local function get_name(url)
   local name = url
 
@@ -24,6 +30,8 @@ local function get_name(url)
   end
 end
 
+---@param short_url string
+---@param clrs_spec? Colorscheme.Spec
 function M.lazy_spec(short_url, clrs_spec)
   clrs_spec = clrs_spec or {}
 
