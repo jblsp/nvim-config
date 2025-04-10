@@ -1,4 +1,5 @@
-local actions = require("joe.util.actions")
+local bufdelete = require("joe.util.bufdelete")
+local fn = require("joe.util.fn")
 
 local map = vim.keymap.set
 
@@ -10,10 +11,14 @@ map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New buffer" })
 map("n", "<leader>bl", "<cmd>b#<cr>", { desc = "Last buffer" })
 map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete buffer and close window" })
 map("n", "<leader>bW", "<cmd>bw<cr>", { desc = "Wipeout buffer and close window" })
-map("n", "<leader>bd", actions.bdelete, { desc = "Delete buffer" })
-map("n", "<leader>bw", actions.bwipeout, { desc = "Wipeout buffer" })
-map("n", "<leader>bo", actions.bdelete_other, { desc = "Delete all other buffers" })
-map("n", "<leader>bO", "", { desc = "Wipeout all other buffers" })
+map("n", "<leader>bd", bufdelete.delete, { desc = "Delete buffer" })
+map("n", "<leader>bw", function()
+  bufdelete.delete({ wipe = true })
+end, { desc = "Wipeout buffer" })
+map("n", "<leader>bo", bufdelete.other, { desc = "Delete all other buffers" })
+map("n", "<leader>bO", function()
+  bufdelete.other({ wipe = true })
+end, { desc = "Wipeout all other buffers" })
 
 -- tabs
 map("n", "[t", "<cmd>tabprev<cr>", { desc = "Previous tab" })
@@ -23,7 +28,7 @@ map("n", "<leader>to", "<cmd>tabonly<cr>", { desc = "Close other tabs" })
 map("n", "<leader>tn", "<cmd>tabnew<cr>", { desc = "New tab" })
 
 -- Clipboard
-map("n", "<leader>cc", actions.anon_to_clip, { desc = 'Copy anon register (") to system clipboard' })
+map("n", "<leader>cc", fn.anon_to_clip, { desc = 'Copy anon register (") to system clipboard' })
 
 map({ "n", "x" }, "<leader>cy", '"+y', { desc = "Yank to system clipboard" })
 map("n", "<leader>cp", '"+p', { desc = "Paste from system clipboard" })

@@ -19,4 +19,15 @@ function M.in_git_project()
   return vim.fn.system(cmd) == "true\n"
 end
 
+function M.anon_to_clip()
+  local content = vim.fn.getreg('"')
+  if content ~= "" then
+    if vim.fn.setreg("+", content) == 0 then
+      local _, lines = content:gsub("\n", "\n")
+      local out = string.format("%d line(s) copied to clipboard", lines)
+      vim.api.nvim_echo({ { out } }, true, {})
+    end
+  end
+end
+
 return M
