@@ -1,5 +1,6 @@
 local o = vim.o
 local g = vim.g
+local lsp = vim.lsp
 
 -- Globals
 g.startup_colors = "rose-pine"
@@ -33,12 +34,3 @@ o.undofile = true -- Save undo history for files
 o.undolevels = 2500
 o.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 o.wrap = false
-
--- LSP Config
-vim.lsp.config("*", {
-  root_markers = { ".git" },
-})
-vim.lsp.enable({
-  "lua_ls",
-  "basedpyright",
-})

@@ -1,10 +1,13 @@
--- Global LSP Configuration
-vim.lsp.config("*", {
+local lsp = vim.lsp
+
+lsp.config("*", {
   root_markers = { ".git" },
 })
-
--- Enabled language servers
-vim.lsp.enable({
+lsp.enable({
+  "basedpyright",
+  "bashls",
+  "clangd",
   "lua_ls",
-  "pyright",
+  "marksman",
+  "ts_ls",
 })

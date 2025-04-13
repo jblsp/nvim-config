@@ -1,16 +1,16 @@
-local lazy_spec = require("joe.util.colorscheme").lazy_spec
+local ls = require("joe.util.colorscheme").make_lazy_spec
 
 return {
-  lazy_spec("EdenEast/nightfox.nvim"),
-  lazy_spec("Shatur/neovim-ayu", { name = "ayu" }),
-  lazy_spec("catppuccin/nvim"),
-  lazy_spec("folke/tokyonight.nvim"),
-  lazy_spec("rebelot/kanagawa.nvim"),
-  lazy_spec("rose-pine/neovim"),
-  lazy_spec("sainnhe/everforest", { setup = false }),
-  lazy_spec("sainnhe/gruvbox-material", { setup = false }),
-  lazy_spec("sainnhe/sonokai", { setup = false }),
-  lazy_spec("navarasu/onedark.nvim", { opts = { style = "warmer" } }),
-  lazy_spec("scottmckendry/cyberdream.nvim"),
-  lazy_spec("vague2k/vague.nvim"),
+  ls("EdenEast/nightfox.nvim"),
+  ls("Shatur/neovim-ayu", { name = "ayu" }),
+  ls("catppuccin/nvim"),
+  ls("folke/tokyonight.nvim"),
+  ls("rebelot/kanagawa.nvim"),
+  ls("rose-pine/neovim"),
+  ls("sainnhe/everforest", { setup = false }),
+  ls("sainnhe/gruvbox-material", { setup = false }),
+  ls("sainnhe/sonokai", { setup = false }),
+  ls("navarasu/onedark.nvim", { opts = { style = "warmer" } }),
+  ls("scottmckendry/cyberdream.nvim"),
+  ls("vague2k/vague.nvim"),
 }

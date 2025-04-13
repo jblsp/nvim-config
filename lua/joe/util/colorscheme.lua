@@ -32,7 +32,7 @@ end
 
 ---@param short_url string
 ---@param clrs_spec? Colorscheme.Spec
-function M.lazy_spec(short_url, clrs_spec)
+function M.make_lazy_spec(short_url, clrs_spec)
   clrs_spec = clrs_spec or {}
 
   if not clrs_spec.name then
