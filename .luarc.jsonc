@@ -7,7 +7,7 @@
     "checkThirdParty": false,
     "library": [
       "$VIMRUNTIME/lua",
-      "${3rd}/luv/library",
+      "${3rd}/luv/library"
     ]
   }
 }

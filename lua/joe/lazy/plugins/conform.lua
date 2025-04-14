@@ -29,6 +29,7 @@ return {
       java = { lsp_format = "fallback" },
       javascript = { "prettier" },
       json = { "prettier" },
+      jsonc = { lsp_format = "fallback" },
       lua = { "stylua" },
       markdown = { "prettier" },
       nix = { "alejandra" },
